@@ -1,0 +1,16 @@
+[
+  {
+    "claim_id": "CLM-2026-9999",
+    "member_ref": "MBR-671858",
+    "provider_name": "Harborview Physical Therapy",
+    "provider_npi_ref": "NPIREF-1006",
+    "cpt_code": "93000",
+    "modifier": null,
+    "billed_amount_cents": 90000,
+    "received_date": "2026-08-06",
+    "sla_due_date": "2026-09-05",
+    "pend_reason_code": "P10",
+    "adjudicator_note": "Member John Q. Testcase DOB 01/02/1980 SSN 123-45-6789 called re: knee MRI. No PA on file for 70553.",
+    "history_snippet": "Reprocessed after enrollment update."
+  }
+]

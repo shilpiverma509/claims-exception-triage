@@ -1,0 +1,7 @@
+[
+  {
+    "claim_id": "CLM-2026-9998",
+    "billed_amount_cents": -50,
+    "adjudicator_note": "corrupted upstream record"
+  }
+]

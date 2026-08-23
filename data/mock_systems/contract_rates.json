@@ -1,0 +1,118 @@
+{
+  "NPIREF-1006|93000": {
+    "rate_cents": 23578,
+    "effective_quarter": "2026-Q3"
+  },
+  "NPIREF-1002|70553": {
+    "rate_cents": 3317847,
+    "effective_quarter": "2026-Q3"
+  },
+  "NPIREF-1002|29881": {
+    "rate_cents": 23720,
+    "effective_quarter": "2026-Q3"
+  },
+  "NPIREF-1003|93000": {
+    "rate_cents": 45705,
+    "effective_quarter": "2026-Q3"
+  },
+  "NPIREF-1006|97110": {
+    "rate_cents": 343091,
+    "effective_quarter": "2026-Q3"
+  },
+  "NPIREF-1002|99213": {
+    "rate_cents": 427243,
+    "effective_quarter": "2026-Q3"
+  },
+  "NPIREF-1002|93000": {
+    "rate_cents": 2207696,
+    "effective_quarter": "2026-Q3"
+  },
+  "NPIREF-1003|70553": {
+    "rate_cents": 634428,
+    "effective_quarter": "2026-Q3"
+  },
+  "NPIREF-1005|99214": {
+    "rate_cents": 137089,
+    "effective_quarter": "2026-Q3"
+  },
+  "NPIREF-1002|45378": {
+    "rate_cents": 643258,
+    "effective_quarter": "2026-Q3"
+  },
+  "NPIREF-1001|99213": {
+    "rate_cents": 60264,
+    "effective_quarter": "2026-Q3"
+  },
+  "NPIREF-1006|45378": {
+    "rate_cents": 47324,
+    "effective_quarter": "2026-Q3"
+  },
+  "NPIREF-1003|45378": {
+    "rate_cents": 3166151,
+    "effective_quarter": "2026-Q3"
+  },
+  "NPIREF-1002|99214": {
+    "rate_cents": 2817302,
+    "effective_quarter": "2026-Q3"
+  },
+  "NPIREF-1001|45378": {
+    "rate_cents": 647299,
+    "effective_quarter": "2026-Q3"
+  },
+  "NPIREF-1003|27447": {
+    "rate_cents": 9083,
+    "effective_quarter": "2026-Q3"
+  },
+  "NPIREF-1005|27447": {
+    "rate_cents": 65581,
+    "effective_quarter": "2026-Q3"
+  },
+  "NPIREF-1002|97110": {
+    "rate_cents": 1053955,
+    "effective_quarter": "2026-Q3"
+  },
+  "NPIREF-1005|29881": {
+    "rate_cents": 2164368,
+    "effective_quarter": "2026-Q3"
+  },
+  "NPIREF-1006|70553": {
+    "rate_cents": 142482,
+    "effective_quarter": "2026-Q3"
+  },
+  "NPIREF-1004|27447": {
+    "rate_cents": 44032,
+    "effective_quarter": "2026-Q3"
+  },
+  "NPIREF-1004|45378": {
+    "rate_cents": 2144,
+    "effective_quarter": "2026-Q3"
+  },
+  "NPIREF-1004|93000": {
+    "rate_cents": 657693,
+    "effective_quarter": "2026-Q3"
+  },
+  "NPIREF-1001|97110": {
+    "rate_cents": 2001,
+    "effective_quarter": "2026-Q3"
+  },
+  "NPIREF-1004|97110": {
+    "rate_cents": 98162,
+    "effective_quarter": "2026-Q3"
+  },
+  "NPIREF-1006|27447": {
+    "rate_cents": 2935850,
+    "effective_quarter": "2026-Q3"
+  },
+  "NPIREF-1003|99213": {
+    "rate_cents": 8403,
+    "effective_quarter": "2026-Q3"
+  },
+  "NPIREF-1001|29881": {
+    "rate_cents": 2119429,
+    "effective_quarter": "2026-Q3"
+  },
+  "NPIREF-1005|93000": {
+    "rate_cents": 1877343,
+    "effective_quarter": "2026-Q3"
+  }
+}

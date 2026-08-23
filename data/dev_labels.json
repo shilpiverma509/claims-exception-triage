@@ -1,0 +1,352 @@
+[
+  {
+    "claim_id": "CLM-2026-8000",
+    "root_cause": "missing_prior_auth",
+    "owner_queue": "prior_auth_team",
+    "severity": 1,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8001",
+    "root_cause": "eligibility_mismatch",
+    "owner_queue": "eligibility_team",
+    "severity": 3,
+    "is_ambiguous": true
+  },
+  {
+    "claim_id": "CLM-2026-8002",
+    "root_cause": "coding_error",
+    "owner_queue": "coding_review",
+    "severity": 2,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8003",
+    "root_cause": "duplicate_claim",
+    "owner_queue": "coding_review",
+    "severity": 3,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8004",
+    "root_cause": "cob_conflict",
+    "owner_queue": "cob_unit",
+    "severity": 1,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8005",
+    "root_cause": "provider_data_mismatch",
+    "owner_queue": "provider_data_mgmt",
+    "severity": 1,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8006",
+    "root_cause": "pricing_mismatch",
+    "owner_queue": "pricing_team",
+    "severity": 3,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8007",
+    "root_cause": "missing_prior_auth",
+    "owner_queue": "prior_auth_team",
+    "severity": 3,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8008",
+    "root_cause": "eligibility_mismatch",
+    "owner_queue": "eligibility_team",
+    "severity": 1,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8009",
+    "root_cause": "coding_error",
+    "owner_queue": "coding_review",
+    "severity": 3,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8010",
+    "root_cause": "duplicate_claim",
+    "owner_queue": "coding_review",
+    "severity": 3,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8011",
+    "root_cause": "cob_conflict",
+    "owner_queue": "cob_unit",
+    "severity": 1,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8012",
+    "root_cause": "provider_data_mismatch",
+    "owner_queue": "provider_data_mgmt",
+    "severity": 4,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8013",
+    "root_cause": "pricing_mismatch",
+    "owner_queue": "pricing_team",
+    "severity": 2,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8014",
+    "root_cause": "missing_prior_auth",
+    "owner_queue": "prior_auth_team",
+    "severity": 1,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8015",
+    "root_cause": "eligibility_mismatch",
+    "owner_queue": "eligibility_team",
+    "severity": 5,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8016",
+    "root_cause": "coding_error",
+    "owner_queue": "coding_review",
+    "severity": 1,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8017",
+    "root_cause": "duplicate_claim",
+    "owner_queue": "coding_review",
+    "severity": 3,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8018",
+    "root_cause": "cob_conflict",
+    "owner_queue": "cob_unit",
+    "severity": 2,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8019",
+    "root_cause": "provider_data_mismatch",
+    "owner_queue": "provider_data_mgmt",
+    "severity": 1,
+    "is_ambiguous": true
+  },
+  {
+    "claim_id": "CLM-2026-8020",
+    "root_cause": "pricing_mismatch",
+    "owner_queue": "pricing_team",
+    "severity": 2,
+    "is_ambiguous": true
+  },
+  {
+    "claim_id": "CLM-2026-8021",
+    "root_cause": "missing_prior_auth",
+    "owner_queue": "prior_auth_team",
+    "severity": 3,
+    "is_ambiguous": true
+  },
+  {
+    "claim_id": "CLM-2026-8022",
+    "root_cause": "eligibility_mismatch",
+    "owner_queue": "eligibility_team",
+    "severity": 2,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8023",
+    "root_cause": "coding_error",
+    "owner_queue": "coding_review",
+    "severity": 1,
+    "is_ambiguous": true
+  },
+  {
+    "claim_id": "CLM-2026-8024",
+    "root_cause": "duplicate_claim",
+    "owner_queue": "coding_review",
+    "severity": 2,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8025",
+    "root_cause": "cob_conflict",
+    "owner_queue": "cob_unit",
+    "severity": 1,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8026",
+    "root_cause": "provider_data_mismatch",
+    "owner_queue": "provider_data_mgmt",
+    "severity": 5,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8027",
+    "root_cause": "pricing_mismatch",
+    "owner_queue": "pricing_team",
+    "severity": 1,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8028",
+    "root_cause": "missing_prior_auth",
+    "owner_queue": "prior_auth_team",
+    "severity": 3,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8029",
+    "root_cause": "eligibility_mismatch",
+    "owner_queue": "eligibility_team",
+    "severity": 3,
+    "is_ambiguous": true
+  },
+  {
+    "claim_id": "CLM-2026-8030",
+    "root_cause": "coding_error",
+    "owner_queue": "coding_review",
+    "severity": 3,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8031",
+    "root_cause": "duplicate_claim",
+    "owner_queue": "coding_review",
+    "severity": 4,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8032",
+    "root_cause": "cob_conflict",
+    "owner_queue": "cob_unit",
+    "severity": 3,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8033",
+    "root_cause": "provider_data_mismatch",
+    "owner_queue": "provider_data_mgmt",
+    "severity": 2,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8034",
+    "root_cause": "pricing_mismatch",
+    "owner_queue": "pricing_team",
+    "severity": 2,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8035",
+    "root_cause": "missing_prior_auth",
+    "owner_queue": "prior_auth_team",
+    "severity": 5,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8036",
+    "root_cause": "eligibility_mismatch",
+    "owner_queue": "eligibility_team",
+    "severity": 2,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8037",
+    "root_cause": "coding_error",
+    "owner_queue": "coding_review",
+    "severity": 2,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8038",
+    "root_cause": "duplicate_claim",
+    "owner_queue": "coding_review",
+    "severity": 2,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8039",
+    "root_cause": "cob_conflict",
+    "owner_queue": "cob_unit",
+    "severity": 4,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8040",
+    "root_cause": "provider_data_mismatch",
+    "owner_queue": "provider_data_mgmt",
+    "severity": 3,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8041",
+    "root_cause": "pricing_mismatch",
+    "owner_queue": "pricing_team",
+    "severity": 1,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8042",
+    "root_cause": "missing_prior_auth",
+    "owner_queue": "prior_auth_team",
+    "severity": 3,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8043",
+    "root_cause": "eligibility_mismatch",
+    "owner_queue": "eligibility_team",
+    "severity": 3,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8044",
+    "root_cause": "coding_error",
+    "owner_queue": "coding_review",
+    "severity": 4,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8045",
+    "root_cause": "duplicate_claim",
+    "owner_queue": "coding_review",
+    "severity": 1,
+    "is_ambiguous": true
+  },
+  {
+    "claim_id": "CLM-2026-8046",
+    "root_cause": "cob_conflict",
+    "owner_queue": "cob_unit",
+    "severity": 5,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8047",
+    "root_cause": "provider_data_mismatch",
+    "owner_queue": "provider_data_mgmt",
+    "severity": 1,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8048",
+    "root_cause": "pricing_mismatch",
+    "owner_queue": "pricing_team",
+    "severity": 2,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8049",
+    "root_cause": "missing_prior_auth",
+    "owner_queue": "prior_auth_team",
+    "severity": 3,
+    "is_ambiguous": false
+  }
+]

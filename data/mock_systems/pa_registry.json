@@ -1,0 +1,324 @@
+{
+  "MBR-671858|93000": {
+    "auth_number": null,
+    "status": "pending",
+    "effective_dates": null
+  },
+  "MBR-571029|70553": {
+    "auth_number": "PA-125103",
+    "status": "approved",
+    "effective_dates": [
+      "2026-07-16",
+      "2026-08-15"
+    ],
+    "_note": "trap: valid auth exists; note may mislead"
+  },
+  "MBR-496922|93000": {
+    "auth_number": "PA-453259",
+    "status": "approved",
+    "effective_dates": [
+      "2026-07-22",
+      "2026-08-21"
+    ]
+  },
+  "MBR-771088|70553": {
+    "auth_number": "PA-686950",
+    "status": "approved",
+    "effective_dates": [
+      "2026-07-22",
+      "2026-08-21"
+    ]
+  },
+  "MBR-322955|99213": {
+    "auth_number": null,
+    "status": "pending",
+    "effective_dates": null
+  },
+  "MBR-680099|99214": {
+    "auth_number": "PA-501325",
+    "status": "approved",
+    "effective_dates": [
+      "2026-07-27",
+      "2026-08-26"
+    ]
+  },
+  "MBR-857168|97110": {
+    "auth_number": "PA-880005",
+    "status": "approved",
+    "effective_dates": [
+      "2026-08-02",
+      "2026-09-01"
+    ]
+  },
+  "MBR-189814|99214": {
+    "auth_number": "PA-941686",
+    "status": "approved",
+    "effective_dates": [
+      "2026-08-01",
+      "2026-08-31"
+    ]
+  },
+  "MBR-665492|45378": {
+    "auth_number": null,
+    "status": "none",
+    "effective_dates": null
+  },
+  "MBR-392004|99213": {
+    "auth_number": "PA-587763",
+    "status": "approved",
+    "effective_dates": [
+      "2026-08-16",
+      "2026-09-15"
+    ]
+  },
+  "MBR-179046|29881": {
+    "auth_number": "PA-358640",
+    "status": "approved",
+    "effective_dates": [
+      "2026-08-03",
+      "2026-09-02"
+    ],
+    "_note": "trap: valid auth exists; note may mislead"
+  },
+  "MBR-161483|70553": {
+    "auth_number": "PA-819338",
+    "status": "approved",
+    "effective_dates": [
+      "2026-07-25",
+      "2026-08-24"
+    ],
+    "_note": "trap: valid auth exists; note may mislead"
+  },
+  "MBR-610311|45378": {
+    "auth_number": null,
+    "status": "pending",
+    "effective_dates": null
+  },
+  "MBR-946305|27447": {
+    "auth_number": "PA-448150",
+    "status": "approved",
+    "effective_dates": [
+      "2026-07-17",
+      "2026-08-16"
+    ]
+  },
+  "MBR-969634|93000": {
+    "auth_number": null,
+    "status": "pending",
+    "effective_dates": null
+  },
+  "MBR-934794|27447": {
+    "auth_number": "PA-187122",
+    "status": "approved",
+    "effective_dates": [
+      "2026-08-12",
+      "2026-09-11"
+    ]
+  },
+  "MBR-213346|97110": {
+    "auth_number": "PA-690626",
+    "status": "approved",
+    "effective_dates": [
+      "2026-08-05",
+      "2026-09-04"
+    ]
+  },
+  "MBR-101773|99214": {
+    "auth_number": null,
+    "status": "pending",
+    "effective_dates": null
+  },
+  "MBR-799287|97110": {
+    "auth_number": "PA-626906",
+    "status": "approved",
+    "effective_dates": [
+      "2026-08-13",
+      "2026-09-12"
+    ]
+  },
+  "MBR-282480|27447": {
+    "auth_number": "PA-886825",
+    "status": "approved",
+    "effective_dates": [
+      "2026-07-25",
+      "2026-08-24"
+    ]
+  },
+  "MBR-805477|99214": {
+    "auth_number": "PA-622087",
+    "status": "approved",
+    "effective_dates": [
+      "2026-07-19",
+      "2026-08-18"
+    ]
+  },
+  "MBR-760356|99213": {
+    "auth_number": "PA-763821",
+    "status": "approved",
+    "effective_dates": [
+      "2026-07-21",
+      "2026-08-20"
+    ]
+  },
+  "MBR-907451|29881": {
+    "auth_number": "PA-883240",
+    "status": "approved",
+    "effective_dates": [
+      "2026-08-11",
+      "2026-09-10"
+    ]
+  },
+  "MBR-686075|70553": {
+    "auth_number": null,
+    "status": "none",
+    "effective_dates": null
+  },
+  "MBR-888295|29881": {
+    "auth_number": "PA-655532",
+    "status": "approved",
+    "effective_dates": [
+      "2026-08-10",
+      "2026-09-09"
+    ]
+  },
+  "MBR-588557|27447": {
+    "auth_number": "PA-591070",
+    "status": "approved",
+    "effective_dates": [
+      "2026-08-16",
+      "2026-09-15"
+    ]
+  },
+  "MBR-497519|99213": {
+    "auth_number": "PA-292651",
+    "status": "approved",
+    "effective_dates": [
+      "2026-07-24",
+      "2026-08-23"
+    ]
+  },
+  "MBR-466960|93000": {
+    "auth_number": null,
+    "status": "pending",
+    "effective_dates": null
+  },
+  "MBR-801978|70553": {
+    "auth_number": "PA-572708",
+    "status": "approved",
+    "effective_dates": [
+      "2026-08-19",
+      "2026-09-18"
+    ]
+  },
+  "MBR-427110|27447": {
+    "auth_number": "PA-677146",
+    "status": "approved",
+    "effective_dates": [
+      "2026-08-10",
+      "2026-09-09"
+    ]
+  },
+  "MBR-693423|70553": {
+    "auth_number": "PA-465024",
+    "status": "approved",
+    "effective_dates": [
+      "2026-08-01",
+      "2026-08-31"
+    ]
+  },
+  "MBR-971084|93000": {
+    "auth_number": "PA-960668",
+    "status": "approved",
+    "effective_dates": [
+      "2026-07-22",
+      "2026-08-21"
+    ]
+  },
+  "MBR-894993|99213": {
+    "auth_number": null,
+    "status": "pending",
+    "effective_dates": null
+  },
+  "MBR-421080|99213": {
+    "auth_number": "PA-242886",
+    "status": "approved",
+    "effective_dates": [
+      "2026-08-02",
+      "2026-09-01"
+    ]
+  },
+  "MBR-650121|70553": {
+    "auth_number": "PA-519142",
+    "status": "approved",
+    "effective_dates": [
+      "2026-08-03",
+      "2026-09-02"
+    ]
+  },
+  "MBR-561865|27447": {
+    "auth_number": "PA-813858",
+    "status": "approved",
+    "effective_dates": [
+      "2026-08-14",
+      "2026-09-13"
+    ]
+  },
+  "MBR-498855|70553": {
+    "auth_number": null,
+    "status": "none",
+    "effective_dates": null
+  },
+  "MBR-264686|99213": {
+    "auth_number": "PA-543790",
+    "status": "approved",
+    "effective_dates": [
+      "2026-08-07",
+      "2026-09-06"
+    ]
+  },
+  "MBR-841296|29881": {
+    "auth_number": "PA-530658",
+    "status": "approved",
+    "effective_dates": [
+      "2026-07-13",
+      "2026-08-12"
+    ]
+  },
+  "MBR-378535|70553": {
+    "auth_number": "PA-536949",
+    "status": "approved",
+    "effective_dates": [
+      "2026-08-13",
+      "2026-09-12"
+    ]
+  },
+  "MBR-385470|93000": {
+    "auth_number": "PA-996821",
+    "status": "approved",
+    "effective_dates": [
+      "2026-08-13",
+      "2026-09-12"
+    ]
+  },
+  "MBR-976566|97110": {
+    "auth_number": "PA-894626",
+    "status": "approved",
+    "effective_dates": [
+      "2026-08-19",
+      "2026-09-18"
+    ]
+  },
+  "MBR-999398|45378": {
+    "auth_number": null,
+    "status": "none",
+    "effective_dates": null
+  },
+  "MBR-425845|45378": {
+    "auth_number": "PA-451379",
+    "status": "approved",
+    "effective_dates": [
+      "2026-08-13",
+      "2026-09-12"
+    ]
+  }
+}

@@ -1,0 +1,177 @@
+[
+  {
+    "claim_id": "CLM-2026-8050",
+    "root_cause": "eligibility_mismatch",
+    "owner_queue": "eligibility_team",
+    "severity": 1,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8051",
+    "root_cause": "coding_error",
+    "owner_queue": "coding_review",
+    "severity": 1,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8052",
+    "root_cause": "duplicate_claim",
+    "owner_queue": "coding_review",
+    "severity": 1,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8053",
+    "root_cause": "cob_conflict",
+    "owner_queue": "cob_unit",
+    "severity": 2,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8054",
+    "root_cause": "provider_data_mismatch",
+    "owner_queue": "provider_data_mgmt",
+    "severity": 5,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8055",
+    "root_cause": "pricing_mismatch",
+    "owner_queue": "pricing_team",
+    "severity": 2,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8056",
+    "root_cause": "missing_prior_auth",
+    "owner_queue": "prior_auth_team",
+    "severity": 1,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8057",
+    "root_cause": "eligibility_mismatch",
+    "owner_queue": "eligibility_team",
+    "severity": 1,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8058",
+    "root_cause": "coding_error",
+    "owner_queue": "coding_review",
+    "severity": 4,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8059",
+    "root_cause": "duplicate_claim",
+    "owner_queue": "coding_review",
+    "severity": 3,
+    "is_ambiguous": true
+  },
+  {
+    "claim_id": "CLM-2026-8060",
+    "root_cause": "cob_conflict",
+    "owner_queue": "cob_unit",
+    "severity": 2,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8061",
+    "root_cause": "provider_data_mismatch",
+    "owner_queue": "provider_data_mgmt",
+    "severity": 3,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8062",
+    "root_cause": "pricing_mismatch",
+    "owner_queue": "pricing_team",
+    "severity": 2,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8063",
+    "root_cause": "missing_prior_auth",
+    "owner_queue": "prior_auth_team",
+    "severity": 3,
+    "is_ambiguous": true
+  },
+  {
+    "claim_id": "CLM-2026-8064",
+    "root_cause": "eligibility_mismatch",
+    "owner_queue": "eligibility_team",
+    "severity": 1,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8065",
+    "root_cause": "coding_error",
+    "owner_queue": "coding_review",
+    "severity": 5,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8066",
+    "root_cause": "duplicate_claim",
+    "owner_queue": "coding_review",
+    "severity": 3,
+    "is_ambiguous": true
+  },
+  {
+    "claim_id": "CLM-2026-8067",
+    "root_cause": "cob_conflict",
+    "owner_queue": "cob_unit",
+    "severity": 3,
+    "is_ambiguous": true
+  },
+  {
+    "claim_id": "CLM-2026-8068",
+    "root_cause": "provider_data_mismatch",
+    "owner_queue": "provider_data_mgmt",
+    "severity": 2,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8069",
+    "root_cause": "pricing_mismatch",
+    "owner_queue": "pricing_team",
+    "severity": 3,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8070",
+    "root_cause": "missing_prior_auth",
+    "owner_queue": "prior_auth_team",
+    "severity": 3,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8071",
+    "root_cause": "eligibility_mismatch",
+    "owner_queue": "eligibility_team",
+    "severity": 3,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8072",
+    "root_cause": "coding_error",
+    "owner_queue": "coding_review",
+    "severity": 3,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8073",
+    "root_cause": "duplicate_claim",
+    "owner_queue": "coding_review",
+    "severity": 3,
+    "is_ambiguous": false
+  },
+  {
+    "claim_id": "CLM-2026-8074",
+    "root_cause": "cob_conflict",
+    "owner_queue": "cob_unit",
+    "severity": 3,
+    "is_ambiguous": false
+  }
+]

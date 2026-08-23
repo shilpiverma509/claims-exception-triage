@@ -1,0 +1,1560 @@
+{
+  "CLM-2026-8000": {
+    "touches": [
+      {
+        "date": "2026-08-06",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-06",
+        "event": "pended for supporting docs",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-06",
+        "event": "enrollment file refresh applied",
+        "actor": "svc_rep_11"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8001": {
+    "touches": [
+      {
+        "date": "2026-07-16",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-16",
+        "event": "enrollment file refresh applied",
+        "actor": "svc_rep_11"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8002": {
+    "touches": [
+      {
+        "date": "2026-08-03",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-03",
+        "event": "pended for supporting docs",
+        "actor": "adjudicator_07"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8003": {
+    "touches": [
+      {
+        "date": "2026-07-22",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-22",
+        "event": "pended for supporting docs",
+        "actor": "adjudicator_07"
+      }
+    ],
+    "prior_submissions": [
+      {
+        "claim_id": "CLM-2026-7003",
+        "cpt_code": "93000",
+        "billed_amount_cents": 4500,
+        "status": "in_process",
+        "same_dos": true
+      }
+    ]
+  },
+  "CLM-2026-8004": {
+    "touches": [
+      {
+        "date": "2026-08-18",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-18",
+        "event": "pended for supporting docs",
+        "actor": "adjudicator_07"
+      },
+      {
+        "date": "2026-08-18",
+        "event": "enrollment file refresh applied",
+        "actor": "adjudicator_07"
+      },
+      {
+        "date": "2026-08-18",
+        "event": "resubmission received",
+        "actor": "system"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8005": {
+    "touches": [
+      {
+        "date": "2026-07-28",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-28",
+        "event": "provider call logged by service rep",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-28",
+        "event": "provider call logged by service rep",
+        "actor": "system"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8006": {
+    "touches": [
+      {
+        "date": "2026-07-22",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-22",
+        "event": "note added by adjudicator",
+        "actor": "svc_rep_11"
+      },
+      {
+        "date": "2026-07-22",
+        "event": "provider call logged by service rep",
+        "actor": "adjudicator_07"
+      },
+      {
+        "date": "2026-07-22",
+        "event": "provider call logged by service rep",
+        "actor": "system"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8007": {
+    "touches": [
+      {
+        "date": "2026-07-26",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-26",
+        "event": "provider call logged by service rep",
+        "actor": "svc_rep_11"
+      },
+      {
+        "date": "2026-07-26",
+        "event": "auto-adjudication attempted; pended",
+        "actor": "adjudicator_07"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8008": {
+    "touches": [
+      {
+        "date": "2026-08-05",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-05",
+        "event": "pended for supporting docs",
+        "actor": "svc_rep_11"
+      },
+      {
+        "date": "2026-08-05",
+        "event": "note added by adjudicator",
+        "actor": "svc_rep_11"
+      },
+      {
+        "date": "2026-08-05",
+        "event": "auto-adjudication attempted; pended",
+        "actor": "system"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8009": {
+    "touches": [
+      {
+        "date": "2026-07-19",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-19",
+        "event": "note added by adjudicator",
+        "actor": "svc_rep_11"
+      },
+      {
+        "date": "2026-07-19",
+        "event": "pended for supporting docs",
+        "actor": "svc_rep_11"
+      },
+      {
+        "date": "2026-07-19",
+        "event": "pended for supporting docs",
+        "actor": "system"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8010": {
+    "touches": [
+      {
+        "date": "2026-07-27",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-27",
+        "event": "pended for supporting docs",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-27",
+        "event": "provider call logged by service rep",
+        "actor": "adjudicator_07"
+      }
+    ],
+    "prior_submissions": [
+      {
+        "claim_id": "CLM-2026-7010",
+        "cpt_code": "99214",
+        "billed_amount_cents": 1500000,
+        "status": "in_process",
+        "same_dos": true
+      }
+    ]
+  },
+  "CLM-2026-8011": {
+    "touches": [
+      {
+        "date": "2026-08-02",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-02",
+        "event": "auto-adjudication attempted; pended",
+        "actor": "adjudicator_07"
+      },
+      {
+        "date": "2026-08-02",
+        "event": "pended for supporting docs",
+        "actor": "system"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8012": {
+    "touches": [
+      {
+        "date": "2026-07-19",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-19",
+        "event": "note added by adjudicator",
+        "actor": "adjudicator_07"
+      },
+      {
+        "date": "2026-07-19",
+        "event": "resubmission received",
+        "actor": "adjudicator_07"
+      },
+      {
+        "date": "2026-07-19",
+        "event": "pended for supporting docs",
+        "actor": "svc_rep_11"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8013": {
+    "touches": [
+      {
+        "date": "2026-08-01",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-01",
+        "event": "note added by adjudicator",
+        "actor": "svc_rep_11"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8014": {
+    "touches": [
+      {
+        "date": "2026-08-04",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-04",
+        "event": "enrollment file refresh applied",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-04",
+        "event": "enrollment file refresh applied",
+        "actor": "svc_rep_11"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8015": {
+    "touches": [
+      {
+        "date": "2026-07-18",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-18",
+        "event": "pended for supporting docs",
+        "actor": "svc_rep_11"
+      },
+      {
+        "date": "2026-07-18",
+        "event": "provider call logged by service rep",
+        "actor": "adjudicator_07"
+      },
+      {
+        "date": "2026-07-18",
+        "event": "provider call logged by service rep",
+        "actor": "system"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8016": {
+    "touches": [
+      {
+        "date": "2026-08-16",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-16",
+        "event": "auto-adjudication attempted; pended",
+        "actor": "system"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8017": {
+    "touches": [
+      {
+        "date": "2026-07-21",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-21",
+        "event": "provider call logged by service rep",
+        "actor": "svc_rep_11"
+      }
+    ],
+    "prior_submissions": [
+      {
+        "claim_id": "CLM-2026-7017",
+        "cpt_code": "45378",
+        "billed_amount_cents": 90000,
+        "status": "in_process",
+        "same_dos": true
+      }
+    ]
+  },
+  "CLM-2026-8018": {
+    "touches": [
+      {
+        "date": "2026-07-26",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-26",
+        "event": "note added by adjudicator",
+        "actor": "svc_rep_11"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8019": {
+    "touches": [
+      {
+        "date": "2026-08-03",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-03",
+        "event": "provider call logged by service rep",
+        "actor": "svc_rep_11"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8020": {
+    "touches": [
+      {
+        "date": "2026-07-25",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-25",
+        "event": "auto-adjudication attempted; pended",
+        "actor": "adjudicator_07"
+      },
+      {
+        "date": "2026-07-25",
+        "event": "pended for supporting docs",
+        "actor": "adjudicator_07"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8021": {
+    "touches": [
+      {
+        "date": "2026-07-24",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-24",
+        "event": "pended for supporting docs",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-24",
+        "event": "resubmission received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-24",
+        "event": "pended for supporting docs",
+        "actor": "system"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8022": {
+    "touches": [
+      {
+        "date": "2026-08-17",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-17",
+        "event": "resubmission received",
+        "actor": "svc_rep_11"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8023": {
+    "touches": [
+      {
+        "date": "2026-08-05",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-05",
+        "event": "resubmission received",
+        "actor": "adjudicator_07"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8024": {
+    "touches": [
+      {
+        "date": "2026-08-07",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-07",
+        "event": "enrollment file refresh applied",
+        "actor": "svc_rep_11"
+      },
+      {
+        "date": "2026-08-07",
+        "event": "note added by adjudicator",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-07",
+        "event": "note added by adjudicator",
+        "actor": "system"
+      }
+    ],
+    "prior_submissions": [
+      {
+        "claim_id": "CLM-2026-7024",
+        "cpt_code": "97110",
+        "billed_amount_cents": 240000,
+        "status": "in_process",
+        "same_dos": true
+      }
+    ]
+  },
+  "CLM-2026-8025": {
+    "touches": [
+      {
+        "date": "2026-08-16",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-16",
+        "event": "enrollment file refresh applied",
+        "actor": "svc_rep_11"
+      },
+      {
+        "date": "2026-08-16",
+        "event": "resubmission received",
+        "actor": "system"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8026": {
+    "touches": [
+      {
+        "date": "2026-07-17",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-17",
+        "event": "note added by adjudicator",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-17",
+        "event": "provider call logged by service rep",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-17",
+        "event": "auto-adjudication attempted; pended",
+        "actor": "adjudicator_07"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8027": {
+    "touches": [
+      {
+        "date": "2026-08-04",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-04",
+        "event": "note added by adjudicator",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-04",
+        "event": "pended for supporting docs",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-04",
+        "event": "provider call logged by service rep",
+        "actor": "svc_rep_11"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8028": {
+    "touches": [
+      {
+        "date": "2026-08-04",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-04",
+        "event": "resubmission received",
+        "actor": "system"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8029": {
+    "touches": [
+      {
+        "date": "2026-07-23",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-23",
+        "event": "enrollment file refresh applied",
+        "actor": "adjudicator_07"
+      },
+      {
+        "date": "2026-07-23",
+        "event": "pended for supporting docs",
+        "actor": "system"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8030": {
+    "touches": [
+      {
+        "date": "2026-08-12",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-12",
+        "event": "resubmission received",
+        "actor": "system"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8031": {
+    "touches": [
+      {
+        "date": "2026-07-16",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-16",
+        "event": "pended for supporting docs",
+        "actor": "adjudicator_07"
+      },
+      {
+        "date": "2026-07-16",
+        "event": "provider call logged by service rep",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-16",
+        "event": "auto-adjudication attempted; pended",
+        "actor": "system"
+      }
+    ],
+    "prior_submissions": [
+      {
+        "claim_id": "CLM-2026-7031",
+        "cpt_code": "99214",
+        "billed_amount_cents": 850000,
+        "status": "in_process",
+        "same_dos": true
+      }
+    ]
+  },
+  "CLM-2026-8032": {
+    "touches": [
+      {
+        "date": "2026-08-05",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-05",
+        "event": "enrollment file refresh applied",
+        "actor": "system"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8033": {
+    "touches": [
+      {
+        "date": "2026-08-01",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-01",
+        "event": "auto-adjudication attempted; pended",
+        "actor": "svc_rep_11"
+      },
+      {
+        "date": "2026-08-01",
+        "event": "note added by adjudicator",
+        "actor": "system"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8034": {
+    "touches": [
+      {
+        "date": "2026-08-19",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-19",
+        "event": "provider call logged by service rep",
+        "actor": "adjudicator_07"
+      },
+      {
+        "date": "2026-08-19",
+        "event": "auto-adjudication attempted; pended",
+        "actor": "adjudicator_07"
+      },
+      {
+        "date": "2026-08-19",
+        "event": "note added by adjudicator",
+        "actor": "adjudicator_07"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8035": {
+    "touches": [
+      {
+        "date": "2026-07-15",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-15",
+        "event": "auto-adjudication attempted; pended",
+        "actor": "system"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8036": {
+    "touches": [
+      {
+        "date": "2026-08-13",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-13",
+        "event": "provider call logged by service rep",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-13",
+        "event": "resubmission received",
+        "actor": "svc_rep_11"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8037": {
+    "touches": [
+      {
+        "date": "2026-07-25",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-25",
+        "event": "note added by adjudicator",
+        "actor": "adjudicator_07"
+      },
+      {
+        "date": "2026-07-25",
+        "event": "auto-adjudication attempted; pended",
+        "actor": "adjudicator_07"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8038": {
+    "touches": [
+      {
+        "date": "2026-07-24",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-24",
+        "event": "provider call logged by service rep",
+        "actor": "system"
+      }
+    ],
+    "prior_submissions": [
+      {
+        "claim_id": "CLM-2026-7038",
+        "cpt_code": "93000",
+        "billed_amount_cents": 90000,
+        "status": "in_process",
+        "same_dos": true
+      }
+    ]
+  },
+  "CLM-2026-8039": {
+    "touches": [
+      {
+        "date": "2026-07-19",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-19",
+        "event": "note added by adjudicator",
+        "actor": "svc_rep_11"
+      },
+      {
+        "date": "2026-07-19",
+        "event": "auto-adjudication attempted; pended",
+        "actor": "svc_rep_11"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8040": {
+    "touches": [
+      {
+        "date": "2026-07-21",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-21",
+        "event": "pended for supporting docs",
+        "actor": "adjudicator_07"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8041": {
+    "touches": [
+      {
+        "date": "2026-08-11",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-11",
+        "event": "provider call logged by service rep",
+        "actor": "svc_rep_11"
+      },
+      {
+        "date": "2026-08-11",
+        "event": "auto-adjudication attempted; pended",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-11",
+        "event": "provider call logged by service rep",
+        "actor": "adjudicator_07"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8042": {
+    "touches": [
+      {
+        "date": "2026-07-22",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-22",
+        "event": "auto-adjudication attempted; pended",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-22",
+        "event": "provider call logged by service rep",
+        "actor": "adjudicator_07"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8043": {
+    "touches": [
+      {
+        "date": "2026-08-10",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-10",
+        "event": "auto-adjudication attempted; pended",
+        "actor": "system"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8044": {
+    "touches": [
+      {
+        "date": "2026-07-23",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-23",
+        "event": "resubmission received",
+        "actor": "system"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8045": {
+    "touches": [
+      {
+        "date": "2026-08-16",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-16",
+        "event": "auto-adjudication attempted; pended",
+        "actor": "adjudicator_07"
+      },
+      {
+        "date": "2026-08-16",
+        "event": "enrollment file refresh applied",
+        "actor": "system"
+      }
+    ],
+    "prior_submissions": [
+      {
+        "claim_id": "CLM-2026-7045",
+        "cpt_code": "27447",
+        "billed_amount_cents": 90000,
+        "status": "in_process",
+        "same_dos": true
+      }
+    ]
+  },
+  "CLM-2026-8046": {
+    "touches": [
+      {
+        "date": "2026-07-21",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-21",
+        "event": "note added by adjudicator",
+        "actor": "svc_rep_11"
+      },
+      {
+        "date": "2026-07-21",
+        "event": "note added by adjudicator",
+        "actor": "svc_rep_11"
+      },
+      {
+        "date": "2026-07-21",
+        "event": "resubmission received",
+        "actor": "system"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8047": {
+    "touches": [
+      {
+        "date": "2026-07-27",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-27",
+        "event": "pended for supporting docs",
+        "actor": "svc_rep_11"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8048": {
+    "touches": [
+      {
+        "date": "2026-07-24",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-24",
+        "event": "provider call logged by service rep",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-24",
+        "event": "provider call logged by service rep",
+        "actor": "svc_rep_11"
+      },
+      {
+        "date": "2026-07-24",
+        "event": "auto-adjudication attempted; pended",
+        "actor": "adjudicator_07"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8049": {
+    "touches": [
+      {
+        "date": "2026-08-04",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-04",
+        "event": "note added by adjudicator",
+        "actor": "adjudicator_07"
+      },
+      {
+        "date": "2026-08-04",
+        "event": "pended for supporting docs",
+        "actor": "svc_rep_11"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8050": {
+    "touches": [
+      {
+        "date": "2026-08-19",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-19",
+        "event": "enrollment file refresh applied",
+        "actor": "system"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8051": {
+    "touches": [
+      {
+        "date": "2026-08-10",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-10",
+        "event": "enrollment file refresh applied",
+        "actor": "svc_rep_11"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8052": {
+    "touches": [
+      {
+        "date": "2026-08-01",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-01",
+        "event": "note added by adjudicator",
+        "actor": "system"
+      }
+    ],
+    "prior_submissions": [
+      {
+        "claim_id": "CLM-2026-7052",
+        "cpt_code": "70553",
+        "billed_amount_cents": 12000,
+        "status": "in_process",
+        "same_dos": true
+      }
+    ]
+  },
+  "CLM-2026-8053": {
+    "touches": [
+      {
+        "date": "2026-07-25",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-25",
+        "event": "resubmission received",
+        "actor": "svc_rep_11"
+      },
+      {
+        "date": "2026-07-25",
+        "event": "pended for supporting docs",
+        "actor": "svc_rep_11"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8054": {
+    "touches": [
+      {
+        "date": "2026-07-22",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-22",
+        "event": "provider call logged by service rep",
+        "actor": "svc_rep_11"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8055": {
+    "touches": [
+      {
+        "date": "2026-08-19",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-19",
+        "event": "note added by adjudicator",
+        "actor": "svc_rep_11"
+      },
+      {
+        "date": "2026-08-19",
+        "event": "auto-adjudication attempted; pended",
+        "actor": "adjudicator_07"
+      },
+      {
+        "date": "2026-08-19",
+        "event": "provider call logged by service rep",
+        "actor": "adjudicator_07"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8056": {
+    "touches": [
+      {
+        "date": "2026-08-15",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-15",
+        "event": "resubmission received",
+        "actor": "system"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8057": {
+    "touches": [
+      {
+        "date": "2026-08-02",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-02",
+        "event": "enrollment file refresh applied",
+        "actor": "svc_rep_11"
+      },
+      {
+        "date": "2026-08-02",
+        "event": "enrollment file refresh applied",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-02",
+        "event": "provider call logged by service rep",
+        "actor": "adjudicator_07"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8058": {
+    "touches": [
+      {
+        "date": "2026-07-22",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-22",
+        "event": "pended for supporting docs",
+        "actor": "adjudicator_07"
+      },
+      {
+        "date": "2026-07-22",
+        "event": "note added by adjudicator",
+        "actor": "svc_rep_11"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8059": {
+    "touches": [
+      {
+        "date": "2026-08-03",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-03",
+        "event": "resubmission received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-03",
+        "event": "resubmission received",
+        "actor": "adjudicator_07"
+      },
+      {
+        "date": "2026-08-03",
+        "event": "provider call logged by service rep",
+        "actor": "system"
+      }
+    ],
+    "prior_submissions": [
+      {
+        "claim_id": "CLM-2026-7059",
+        "cpt_code": "70553",
+        "billed_amount_cents": 4200000,
+        "status": "in_process",
+        "same_dos": true
+      }
+    ]
+  },
+  "CLM-2026-8060": {
+    "touches": [
+      {
+        "date": "2026-08-09",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-09",
+        "event": "resubmission received",
+        "actor": "adjudicator_07"
+      },
+      {
+        "date": "2026-08-09",
+        "event": "provider call logged by service rep",
+        "actor": "svc_rep_11"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8061": {
+    "touches": [
+      {
+        "date": "2026-08-14",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-14",
+        "event": "resubmission received",
+        "actor": "adjudicator_07"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8062": {
+    "touches": [
+      {
+        "date": "2026-07-26",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-26",
+        "event": "auto-adjudication attempted; pended",
+        "actor": "svc_rep_11"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8063": {
+    "touches": [
+      {
+        "date": "2026-07-16",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-16",
+        "event": "auto-adjudication attempted; pended",
+        "actor": "adjudicator_07"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8064": {
+    "touches": [
+      {
+        "date": "2026-08-07",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-07",
+        "event": "provider call logged by service rep",
+        "actor": "system"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8065": {
+    "touches": [
+      {
+        "date": "2026-07-13",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-13",
+        "event": "pended for supporting docs",
+        "actor": "system"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8066": {
+    "touches": [
+      {
+        "date": "2026-08-13",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-13",
+        "event": "provider call logged by service rep",
+        "actor": "adjudicator_07"
+      },
+      {
+        "date": "2026-08-13",
+        "event": "enrollment file refresh applied",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-13",
+        "event": "provider call logged by service rep",
+        "actor": "svc_rep_11"
+      }
+    ],
+    "prior_submissions": [
+      {
+        "claim_id": "CLM-2026-7066",
+        "cpt_code": "70553",
+        "billed_amount_cents": 1500000,
+        "status": "in_process",
+        "same_dos": true
+      }
+    ]
+  },
+  "CLM-2026-8067": {
+    "touches": [
+      {
+        "date": "2026-08-13",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-13",
+        "event": "auto-adjudication attempted; pended",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-13",
+        "event": "enrollment file refresh applied",
+        "actor": "svc_rep_11"
+      },
+      {
+        "date": "2026-08-13",
+        "event": "provider call logged by service rep",
+        "actor": "svc_rep_11"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8068": {
+    "touches": [
+      {
+        "date": "2026-08-19",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-19",
+        "event": "pended for supporting docs",
+        "actor": "adjudicator_07"
+      },
+      {
+        "date": "2026-08-19",
+        "event": "provider call logged by service rep",
+        "actor": "svc_rep_11"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8069": {
+    "touches": [
+      {
+        "date": "2026-07-21",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-21",
+        "event": "pended for supporting docs",
+        "actor": "adjudicator_07"
+      },
+      {
+        "date": "2026-07-21",
+        "event": "pended for supporting docs",
+        "actor": "adjudicator_07"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8070": {
+    "touches": [
+      {
+        "date": "2026-07-25",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-25",
+        "event": "auto-adjudication attempted; pended",
+        "actor": "svc_rep_11"
+      },
+      {
+        "date": "2026-07-25",
+        "event": "resubmission received",
+        "actor": "adjudicator_07"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8071": {
+    "touches": [
+      {
+        "date": "2026-07-22",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-22",
+        "event": "auto-adjudication attempted; pended",
+        "actor": "adjudicator_07"
+      },
+      {
+        "date": "2026-07-22",
+        "event": "note added by adjudicator",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-22",
+        "event": "resubmission received",
+        "actor": "system"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8072": {
+    "touches": [
+      {
+        "date": "2026-07-18",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-07-18",
+        "event": "enrollment file refresh applied",
+        "actor": "svc_rep_11"
+      },
+      {
+        "date": "2026-07-18",
+        "event": "auto-adjudication attempted; pended",
+        "actor": "adjudicator_07"
+      },
+      {
+        "date": "2026-07-18",
+        "event": "auto-adjudication attempted; pended",
+        "actor": "svc_rep_11"
+      }
+    ],
+    "prior_submissions": []
+  },
+  "CLM-2026-8073": {
+    "touches": [
+      {
+        "date": "2026-08-13",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-13",
+        "event": "auto-adjudication attempted; pended",
+        "actor": "svc_rep_11"
+      },
+      {
+        "date": "2026-08-13",
+        "event": "enrollment file refresh applied",
+        "actor": "system"
+      }
+    ],
+    "prior_submissions": [
+      {
+        "claim_id": "CLM-2026-7073",
+        "cpt_code": "45378",
+        "billed_amount_cents": 4200000,
+        "status": "in_process",
+        "same_dos": true
+      }
+    ]
+  },
+  "CLM-2026-8074": {
+    "touches": [
+      {
+        "date": "2026-08-13",
+        "event": "claim received",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-13",
+        "event": "note added by adjudicator",
+        "actor": "system"
+      },
+      {
+        "date": "2026-08-13",
+        "event": "resubmission received",
+        "actor": "svc_rep_11"
+      },
+      {
+        "date": "2026-08-13",
+        "event": "provider call logged by service rep",
+        "actor": "adjudicator_07"
+      }
+    ],
+    "prior_submissions": []
+  }
+}
