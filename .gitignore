@@ -10,5 +10,4 @@ outputs/
 data/feedback_cases.json
 
 # Internal programme material and third-party PII — kept locally, never committed.
-cohort-5-instruction-packet.pdf
 *instruction-packet*.pdf
