@@ -5,3 +5,6 @@ __pycache__/
 .pytest_cache/
 outputs/
 .claude/
+
+# Generated from real analyst decisions at runtime; never fixture data.
+data/feedback_cases.json
