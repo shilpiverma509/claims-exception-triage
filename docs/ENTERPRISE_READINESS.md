@@ -65,7 +65,17 @@ What it would take, in order:
 4. Field-minimization review with privacy office; keep `redact.py` as belt-and-suspenders.
 5. Immutable audit sink + retention policy.
 6. Shadow-mode pilot: run triage on live pends *without* showing analysts, compare against analyst outcomes for 2–4 weeks; that produces the real (non-synthetic) accuracy baseline.
-7. Feedback loop: analyst corrections (rejects/reassigns) become labeled eval cases — the P2 requirement designed-for but not built.
+7. Feedback loop: **built** (`feedback.py`, §9 below) — corrections already become regression cases, calibration data, and prompt material. What production adds is the delayed-outcome join described there.
+
+## 9. Feedback loop in production
+
+The prototype closes the loop through a human release: analyst corrections produce regression cases, a confidence-calibration table, and candidate prompt exemplars, and a person decides what to act on. Nothing retrains itself. Three things change at production scale:
+
+- **Ground truth arrives late.** A reassignment says "not my queue," not which queue is right. The trustworthy label is the team that actually *closed* the claim, known days or weeks later. Production should join corrections against closure records rather than promoting a first click, and treat the immediate correction as provisional.
+- **Feedback is not a random sample.** Analysts correct what they notice; silent downstream fixes never reach the loop, and we never see the counterfactual for a routing we didn't choose. So the measured correction rate is a floor on the true error rate, and a periodic human-labeled audit sample — drawn independently of the loop — is required to keep the accuracy numbers honest.
+- **Governance.** Threshold changes and prompt changes derived from feedback are releases: versioned, evaluated against both the dev set and the accumulated regression suite, and recorded in the decision log. The one thing never to build is a path where corrections silently alter behaviour between eval runs — at that point the eval numbers describe a system that no longer exists.
+
+Two controls belong with it: **rate-limit how fast thresholds may move** on feedback evidence (a week of unusual claims should not retune the floor), and **keep a re-validation set the loop never feeds**, or the system will grade its own homework.
 
 ## 8. Known risks (stated, not hidden)
 

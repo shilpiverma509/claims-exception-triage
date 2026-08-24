@@ -69,14 +69,47 @@ Each entry: what happened, how it was detected, what we did. All dated in `DECIS
 
 8. **Automation bias (open, structural).** Analysts may rubber-stamp high-confidence recommendations, which would convert the human approval gate into a formality. *Mitigations:* confidence and cited evidence are shown on every card so verification is fast; the audit log makes rubber-stamping *measurable* through time-to-approve distributions; a spot-audit workflow on approved claims is the designed next step.
 
-## 6. Human checkpoints
+## 6. The feedback loop — how analyst corrections improve the system
+
+Implemented in `src/triage/feedback.py`; run with `make feedback`.
+
+Every Approve / Reject / Reassign already lands in the audit log. The review UI now also asks a correcting analyst **what the actual root cause was** — previously it captured only the corrected queue, which recorded the symptom and lost the diagnosis, since routing is derived from cause via the taxonomy map.
+
+### The rule everything else follows from: an approval is not a label
+
+A Reject or Reassign costs the analyst effort, so it carries real information. An Approve may mean "correct" — or may mean someone clicked through forty claims in four minutes, which is precisely the automation bias listed in failure mode #8. **Treating approvals as confirmed-correct would feed the system its own output as ground truth and let errors reinforce themselves.** So corrections drive learning; approvals appear only in calibration denominators and are never emitted as labels. This is pinned by `test_feedback.py::test_approvals_never_become_labels`.
+
+### What the loop produces
+
+**1. Regression cases** (`data/feedback_cases.json`) — corrected claims written in the same label schema `evaluate.py` already reads, so they are scoreable immediately. Severity is derived arithmetically from dollars and SLA rather than asked of the analyst: severity here means "what does getting this wrong cost," which is a function of claim facts, and every extra field on the review screen is friction that reduces how much feedback arrives at all.
+
+*This set is a regression suite, not a representative sample.* Every case in it is one the system got wrong, so it answers "have we fixed what we broke?" — never "how accurate are we." Averaging it with the dev set would produce a meaningless number, which is why it lives in its own file. It is also the direct answer to the dev-set saturation in §4: real corrections are the hard cases our generator cannot invent.
+
+**2. Confidence calibration** — correction rate bucketed by model confidence. If confidence is meaningful, correction rate should fall as confidence rises; if it doesn't, confidence is decoration and the floor protects nobody. `recommend_floor()` suggests the lowest floor whose residual error clears a target, **and reports what that floor costs** in claims escalated — a floor that routes everything to a human is perfectly safe and perfectly useless. It declines to recommend at all when the evidence is thin rather than guessing. This is the path to closing failure mode #7, where the 0.65 floor has never actually fired on real output.
+
+**3. Prompt improvement** — the confusion table (which cause pairs get mixed up) plus candidate few-shot exemplars rendered ready to paste. A repeated (said X, actually Y) pair is a *prompt* problem, not a model problem: it means the taxonomy definitions for X and Y do not separate cleanly in the instructions. Analysts can also mark **"none of these fit"**, which is recorded as a taxonomy gap and never used as a label — recurring gaps are evidence the 7-cause taxonomy itself needs to change.
+
+### What the loop deliberately does not do
+
+No retraining, and no feeding corrections into an inference-time lookup. Every output lands in front of a human before it changes behaviour: eval cases get reviewed, a suggested floor is a recommendation in a report, and exemplars are pasted into a versioned prompt by a person. **The loop closes through a release, not silently** — otherwise the prompt drifts between eval runs and the numbers stop meaning anything.
+
+### Known limits of feedback data itself
+
+These are properties of the data, not bugs, and they bound what any loop can achieve:
+
+- **Delayed and displaced ground truth.** A reassignment says "not my queue" — it does not reliably say which queue *is* right. The trustworthy label is which team actually closed the claim, known days or weeks later. A first-click correction should not be promoted to ground truth without that confirmation.
+- **No counterfactual.** We only observe outcomes for the routing we chose. If a claim goes to Team A and they resolve it, we never learn Team B would have been faster. Only shadow-routing or a holdout slice can measure that.
+- **Selection bias.** Feedback exists only where someone bothered to click. Silent downstream fixes never reach the loop, so the correction rate systematically understates the true error rate — which is why the calibration table labels it a lower bound.
+- **Survivorship in the archive.** If corrections ever feed an inference-time corpus, errors nobody corrected quietly become precedent. Any such design needs a re-validation set that the loop never touches.
+
+## 7. Human checkpoints
 
 1. **Every action requires human approval.** The system proposes; Approve / Reject / Reassign in the review UI are audit entries. Nothing executes.
 2. **The escalation queue is code-owned.** Confidence below 0.65, or a stated cause contradicted by a source system, routes to the Senior Analyst Desk — and the model is schema-blocked from selecting that queue itself, so it cannot dodge accountability by hedging or suppress a review by sounding confident.
 3. **The guard is the human's deterministic proxy:** urgency floors, taxonomy-enforced routing, and contradiction checks, all unit-tested to only ever escalate.
 4. **Full reconstructability:** every audit row carries model name, prompt version, input hash, actor, and outcome, append-only.
 
-## 7. How AI assisted the build itself
+## 8. How AI assisted the build itself
 
 This project was built pair-programming with Claude Code, with the developer directing scope, ratifying every design decision (`DECISION_LOG.md`), and reviewing all output. The division of labour is worth stating plainly: the human chose the track, the taxonomy, the guard philosophy, and the evaluation discipline — and caught the "recall@10 worse than baseline" anomaly by refusing to accept a number that made no sense. The AI wrote module code against those contracts, ran the diagnostic loops that isolated the tie-break gap and traced the fixture collision, and drafted documentation the human edited.
 

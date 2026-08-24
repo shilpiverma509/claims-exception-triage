@@ -1,0 +1,24 @@
+[
+  {
+    "claim_id": "CLM-2026-8017",
+    "root_cause": "coding_error",
+    "owner_queue": "coding_review",
+    "severity": 3,
+    "is_ambiguous": true,
+    "source": "analyst_correction",
+    "corrected_by": "analyst_demo",
+    "corrected_at": "2026-08-24T11:09:00",
+    "system_said": "duplicate_claim"
+  },
+  {
+    "claim_id": "CLM-2026-8038",
+    "root_cause": "coding_error",
+    "owner_queue": "coding_review",
+    "severity": 3,
+    "is_ambiguous": true,
+    "source": "analyst_correction",
+    "corrected_by": "analyst_demo",
+    "corrected_at": "2026-08-24T11:10:00",
+    "system_said": "duplicate_claim"
+  }
+]

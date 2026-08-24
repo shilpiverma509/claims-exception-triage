@@ -21,6 +21,8 @@ if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
 from triage import audit, config  # noqa: E402
+from triage.feedback import TAXONOMY_GAP  # noqa: E402
+from triage.models import ROOT_CAUSE_TO_QUEUE, RootCause  # noqa: E402
 
 OUT_DIR = ROOT / "outputs"
 AUDIT_PATH = ROOT / "outputs" / "audit.jsonl"
@@ -58,9 +60,21 @@ def redaction_notices(rows: list[dict]) -> dict[str, list[dict]]:
     return notices
 
 
-def record_decision(claim_id: str, decision: str, note: str = "") -> None:
-    audit.log("human_decision", claim_id, {"decision": decision, "note": note},
-               actor="analyst_streamlit")
+def record_decision(claim_id: str, decision: str, corrected_root_cause: str | None = None,
+                    corrected_queue: str | None = None, note: str = "") -> None:
+    """Write one analyst decision to the audit log.
+
+    `corrected_root_cause` is the field that makes the feedback loop work. Routing
+    is derived from the cause via the taxonomy map, so capturing only a corrected
+    queue records the symptom and loses the diagnosis — and the diagnosis is the
+    part `feedback.py` can turn into a regression case or a prompt exemplar.
+    """
+    audit.log("human_decision", claim_id,
+              {"decision": decision,
+               "corrected_root_cause": corrected_root_cause,
+               "corrected_queue": corrected_queue,
+               "note": note},
+              actor="analyst_streamlit")
 
 
 def run_picker() -> Path | None:
@@ -128,17 +142,46 @@ def render_claim(row: dict, decisions: dict[str, dict], notices: dict[str, list[
 
         with right:
             if decision:
-                st.success(f"{decision['outcome']['decision'].upper()} by {decision['actor']} "
-                           f"at {decision['ts'][:19]}")
+                out = decision["outcome"]
+                shown = out["decision"].upper() if isinstance(out, dict) else str(out).upper()
+                st.success(f"{shown} by {decision['actor']} at {decision['ts'][:19]}")
+                if isinstance(out, dict) and out.get("corrected_root_cause"):
+                    st.caption(f"corrected to: `{out['corrected_root_cause']}`")
+
+            # Approving needs no extra input — keep the common case one click, or
+            # the friction suppresses the very feedback we are trying to collect.
             st.button("✅ Approve", key=f"approve_{cid}",
                       on_click=record_decision, args=(cid, "approve"))
-            st.button("❌ Reject", key=f"reject_{cid}",
-                      on_click=record_decision, args=(cid, "reject"))
-            reassign_to = st.selectbox("Reassign to", list(config.TEAMS.keys()),
-                                       format_func=lambda q: config.TEAMS[q].name,
-                                       key=f"reassign_select_{cid}")
-            st.button("↪ Reassign", key=f"reassign_{cid}",
-                      on_click=record_decision, args=(cid, "reassign", reassign_to.value))
+
+            st.markdown("---")
+            st.caption("Correcting? Tell us the actual cause — that's what "
+                       "improves the system.")
+
+            cause_options = [c.value for c in RootCause] + [TAXONOMY_GAP]
+            corrected_cause = st.selectbox(
+                "Actual root cause", cause_options,
+                index=cause_options.index(assessment["root_cause"])
+                if assessment["root_cause"] in cause_options else 0,
+                format_func=lambda v: ("⚠️ none of these fit" if v == TAXONOMY_GAP
+                                        else v.replace("_", " ")),
+                key=f"cause_select_{cid}",
+                help="Pick 'none of these' when the taxonomy itself is the problem — "
+                     "that is recorded separately and never used as a training label.")
+
+            # Queue follows the cause deterministically, same as the guard does,
+            # so an analyst can't create a cause/queue pairing the system forbids.
+            derived_queue = (ROOT_CAUSE_TO_QUEUE[RootCause(corrected_cause)].value
+                             if corrected_cause != TAXONOMY_GAP else None)
+            if derived_queue:
+                st.caption(f"→ routes to `{derived_queue}`")
+
+            note = st.text_input("Note (optional)", key=f"note_{cid}",
+                                 placeholder="what the system missed")
+
+            st.button("❌ Reject", key=f"reject_{cid}", on_click=record_decision,
+                      args=(cid, "reject", corrected_cause, derived_queue, note))
+            st.button("↪ Reassign", key=f"reassign_{cid}", on_click=record_decision,
+                      args=(cid, "reassign", corrected_cause, derived_queue, note))
 
 
 def queue_tab(results: list[dict]) -> None:

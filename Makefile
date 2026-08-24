@@ -8,7 +8,7 @@ INPUT ?= data/dev_claims.json
 LABELS ?= data/dev_labels.json
 RUN_NAME := triage_$(basename $(notdir $(INPUT)))_$(MODE)_$(PROMPT)
 
-.PHONY: install data run triage baseline eval eval-baseline test demo clean
+.PHONY: install data run triage baseline eval eval-baseline feedback test demo clean
 
 install:
 	pip install -r requirements.txt
@@ -28,6 +28,11 @@ eval:
 
 eval-baseline:
 	$(PY) -m triage.evaluate --run outputs/triage_$(basename $(notdir $(INPUT)))_baseline.json --labels $(LABELS)
+
+# Turn analyst decisions in the audit log into regression cases, a confidence
+# calibration table, and prompt-improvement material.
+feedback:
+	$(PY) -m triage.feedback --run outputs/$(RUN_NAME).json --report
 
 test:
 	pytest -q
