@@ -2,7 +2,7 @@
 
 **Candidate:** Shilpi Verma · **Program:** UHC Tech AI Transformation, Cohort 5 FDE Qualification
 **Track:** #1 — Claims Exception Triage Assistant
-**Due:** Aug 28, 2026 EOD → email to the two programme reviewers (addresses held privately)
+**Due:** Aug 28, 2026 EOD → submitted by email per the programme instructions
 **Stack:** Python (Jupyter notebook for logic + evals) · Streamlit demo app · Anthropic API
 
 ---
