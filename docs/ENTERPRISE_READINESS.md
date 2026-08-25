@@ -49,7 +49,7 @@ Layered, and each layer is *deterministic code, not another model*:
 
 ## 6. Model governance
 
-- **Model:** `claude-sonnet-4-5`, chosen deliberately over a frontier-large model — triage is a bounded classification/reasoning task over a small context; the eval shows Sonnet-tier is sufficient (98% root-cause accuracy on dev). Cost/latency headroom is a feature, not a compromise.
+- **Model:** `claude-sonnet-4-5`, chosen deliberately over a frontier-large model — triage is a bounded classification/reasoning task over a small context; the eval shows Sonnet-tier is sufficient (100% root-cause accuracy on dev, and the set is saturated — see AI_EVIDENCE §4). Cost/latency headroom is a feature, not a compromise.
 - **Prompts are versioned artifacts** (`prompts.py`: V1/V2/V3), stamped into every output row and every audit line. A prompt change in production is a release, not an edit.
 - **Drift monitoring hook:** guard-adjustment rate and human-review rate are already computed per run; trending them over time is the production drift alarm.
 

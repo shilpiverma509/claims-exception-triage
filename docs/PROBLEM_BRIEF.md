@@ -24,12 +24,14 @@ An assistant that pre-diagnoses every pended claim — root cause from a fixed 7
 
 | Metric | Rule-based baseline (pend-code lookup + dollars) | This system |
 |---|---|---|
-| Root-cause accuracy | 72% | **98%** |
-| Routing accuracy (correct team) | 76% | **98%** |
+| Root-cause accuracy | 72% | **100%** |
+| Routing accuracy (correct team) | 76% | **100%** |
 | Critical claims (sev 4–5) in top 10 | 50% | **100%** |
 | Urgency ↔ severity rank correlation | 0.55 | **0.81** |
 
-The baseline is the honest strawman for "why an LLM at all": where pend codes are generic, a lookup table guesses blindly; the model reads the note and checks the evidence. Planted adversarial cases (notes that imply missing prior-auth while the registry holds a valid approval) confirm the model verifies against source systems rather than trusting the note. A 25-claim sealed eval set is scored exactly once, after prompt freeze, and reported verbatim.
+The baseline is the honest strawman for "why an LLM at all": where pend codes are generic, a lookup table guesses blindly; the model reads the note and checks the evidence. Planted adversarial cases (notes that imply missing prior-auth while the registry holds a valid approval) confirm the model verifies against source systems rather than trusting the note.
+
+**Read that 100% with the caveat we found ourselves:** prompt versions V1, V2, and V3 all score identically, so **this dev set is saturated** — it can no longer distinguish prompt quality, and further tuning against it would measure noise. The same 50 claims hold the baseline to 72%, so the set is not trivially easy; it is simply no longer discriminating at this model tier. A 25-claim sealed eval set is scored exactly once, after prompt freeze, and reported verbatim.
 
 ## Scope
 
