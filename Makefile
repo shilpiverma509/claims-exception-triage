@@ -3,7 +3,7 @@ export PYTHONPATH
 
 PY := python3
 MODE ?= mock
-PROMPT ?= v1
+PROMPT ?= v3        # frozen prompt; v1/v2 kept as iteration history
 INPUT ?= data/dev_claims.json
 LABELS ?= data/dev_labels.json
 RUN_NAME := triage_$(basename $(notdir $(INPUT)))_$(MODE)_$(PROMPT)

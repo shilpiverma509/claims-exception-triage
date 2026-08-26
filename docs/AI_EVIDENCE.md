@@ -29,7 +29,7 @@ All three live in `prompts.py` as versioned constants. The version used is stamp
 - 75 seeded synthetic claims from a committed, reproducible generator, split 50 dev / 25 sealed eval. Each carries a ground-truth label (cause, queue, severity 1–5, ambiguity flag) that is never shown to the model.
 - Evidence fixtures for three mock source systems are generated *from* those labels, with planted adversarial cases: three "disprovable traps" where the note implies a missing prior-auth but the registry holds a valid approval, and deliberate rate-table gaps that serve as the *positive* evidence for pricing claims.
 - Metrics: root-cause accuracy, routing accuracy, critical-recall@10 (severity ≥4 claims surfaced in the top 10), Spearman correlation between final urgency and true severity, and human-review rate. `evaluate.py` also emits a confusion matrix and a per-run markdown report.
-- **Sealed-set discipline:** the 25 eval claims are scored exactly once, after prompt freeze, and reported verbatim regardless of the result. As of this writing they remain untouched.
+- **Sealed-set discipline:** the 25 eval claims were scored **exactly once**, on 2026-08-27, after the prompt was frozen at V3. The result is reported verbatim in §4a below, including the miss.
 
 ## 4. Results — dev set, 50 claims, live Claude calls
 
@@ -48,6 +48,32 @@ The baseline is the honest strawman for "why an LLM at all": root cause from the
 2. **The dev set is saturated.** It can no longer distinguish prompt quality at this model tier, so further prompt iteration against it would be measuring noise. The discriminating tests that remain are the sealed set and a real-data shadow pilot.
 
 We state this rather than claiming the ladder "improved accuracy," because on this data it did not. An earlier V3 run scored 98%; that single miss led directly to failure mode #1.
+
+## 4a. Sealed-set result — scored once, reported verbatim
+
+25 held-out claims, prompt V3 frozen, live Claude calls. Never used during prompt iteration.
+
+| Metric | Result |
+|---|---|
+| Root-cause accuracy | **96%** (24 / 25) |
+| Routing accuracy | **96%** |
+| Critical-recall@10 | **100%** |
+| Spearman urgency correlation | **0.826** |
+| Human-review rate | 0% |
+| Claims processed / errored | 25 / 0 |
+
+**This is the number to trust**, not the 100% on dev — the dev set is saturated (§4) and can no longer discriminate. A 4-point drop from dev to held-out data is a normal, healthy generalisation gap; an identical 100% would have been the more suspicious result.
+
+**The one miss, in full — `CLM-2026-8050`.** Truth: `eligibility_mismatch`. The model said `pricing_mismatch` at 0.85 confidence. The note read *"Member shows termed coverage on DOS. Enrollment file lag suspected."*
+
+Its stated reasoning: the prior-auth registry showed an approved auth covering the date of service, which it took as proof coverage was active, so it discounted the note — then found `contract_rate: null` and concluded the missing rate was the real blocker.
+
+**Two distinct faults, and the first one is ours:**
+
+1. **Our prompt caused it.** V3's `VERIFY_BLOCK` states: *"A missing evidence.contract_rate entry is positive evidence FOR pricing_mismatch."* The rate was missing, so the model applied our rule as written. That instruction is too absolute — a missing rate can coexist with an eligibility problem, and nothing told the model to weigh the two. **Fix: soften the rule to "contributing evidence, not decisive."** Recorded as a prompt change for the next version rather than applied now, because the prompt is frozen and re-running the sealed set would destroy its value.
+2. **A reasoning error the prompt did not cause.** An approved prior authorisation does not prove eligibility on the date of service — those are separate systems. The model treated one as evidence for the other.
+
+Worth stating plainly: the model produced a *coherent, evidence-citing, wrong* answer at 0.85 confidence. No confidence threshold would have caught it, because it was not uncertain — it was confidently misled by an instruction we wrote. That is the strongest argument in this package for the guard layer, the human approval gate, and the feedback loop existing at all.
 
 ## 5. Failure-mode catalog
 

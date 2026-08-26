@@ -1,5 +1,7 @@
 # How one claim travels through the triage assistant
 
+> **Note on the numbers below:** this walkthrough was written early in the build to explain *how the pipeline works*, and it illustrates that using **mock-mode** (keyword-matching, zero-cost) output — including the 88%/78%/0.86 table in step 9. Those are **not** the reported evaluation numbers. The official results (72% baseline vs. **100%** live-LLM root-cause accuracy, reported in `AI_EVIDENCE.md` and `PROBLEM_BRIEF.md`) come from real Claude API calls in `live` mode. This document is a teaching aid for the mechanics, not a source of truth for the eval — see those two files for the numbers that count.
+
 Every stage explained in plain English, with the actual data for one real claim (`CLM-2026-8001`) shown at each step — so you can see not just what the code says, but what it does.
 
 ---

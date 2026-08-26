@@ -96,7 +96,9 @@ def main() -> None:
     p = argparse.ArgumentParser()
     p.add_argument("--input", required=True)
     p.add_argument("--mode", default=config.TRIAGE_MODE, choices=["live", "mock", "cached"])
-    p.add_argument("--prompt", default="v1", choices=["v1", "v2", "v3"])
+    p.add_argument("--prompt", default="v3", choices=["v1", "v2", "v3"],
+                   help="v3 is the frozen prompt; v1/v2 retained as the "
+                        "documented iteration history")
     p.add_argument("--today", default=str(TODAY))
     args = p.parse_args()
     summary = run(ROOT / args.input if not Path(args.input).is_absolute() else Path(args.input),

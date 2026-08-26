@@ -63,7 +63,9 @@ Everything replays from saved files. **No network needed.** Nothing can time out
 | Critical claims in top 10 | 50% | **100%** |
 | Urgency vs severity correlation | 0.55 | **0.82** |
 
-> "But the number I'd point at is a failure. Our first ranking metric came back *worse than that baseline* — 0.375 against 0.50. The eval caught it: the SLA rule had pinned nineteen claims to the same urgency, and with no tie-break, top-ten membership was luck. One line fixed it. Our single miss out of fifty turned out to be a bug in our own test-data generator — the model had flagged the contradiction itself and we'd scored it wrong.
+> "And on the sealed set — 25 claims held back, scored exactly once after freezing the prompt — **96%**. That's the number I'd trust, not the 100%.
+>
+> But the number I'd point at is a failure. Our first ranking metric came back *worse than that baseline* — 0.375 against 0.50. The eval caught it: the SLA rule had pinned nineteen claims to the same urgency, and with no tie-break, top-ten membership was luck. One line fixed it. Our single miss out of fifty turned out to be a bug in our own test-data generator — the model had flagged the contradiction itself and we'd scored it wrong.
 >
 > And V1, V2 and V3 all score 100% — zero-shot cleared the traps unprompted. **The dev set is saturated**; it can't discriminate any more. That's a limit of our data, not a win."
 
@@ -100,6 +102,7 @@ Keep Beats **1, 3, 4**. Drop Beat 2 (say "it checks three source systems before 
 | Critical-recall@10 | baseline 50% → system 100% |
 | Spearman urgency correlation | 0.55 → 0.82 |
 | Trap claim CLM-2026-8001 | model 82 → guard 95, confidence 0.88 |
+| Sealed set (held out, scored once) | 96% cause · 96% routing · 100% recall@10 |
 | Tests passing | 43 |
 | Dev / sealed split | 50 / 25 |
 

@@ -11,3 +11,7 @@ data/feedback_cases.json
 
 # Internal programme material and third-party PII — kept locally, never committed.
 *instruction-packet*.pdf
+
+# Rehearsal/demo recordings — large binaries, shared via Drive not git.
+*.mp4
+*.mov
