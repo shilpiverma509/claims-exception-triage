@@ -110,4 +110,4 @@ One rule governs it: **an approval is not a label.** A rejection costs the analy
 
 **Deliberately excluded:** real payment or denial decisions, live system integration, automatic execution of any action, model fine-tuning, and multi-agent architecture — each with reasoning recorded in the PRD.
 
-**Honest constraints:** every number here comes from synthetic data whose difficulty we controlled, so the time-saving case remains a hypothesis until a shadow-mode pilot runs against real claims. Production would need the model hosted inside the enterprise boundary under a data agreement, with field-level minimisation — at which point the redaction layer becomes a second line of defence rather than the primary control.
+**Honest constraints:** every number here comes from synthetic data whose difficulty we controlled, so the time-saving case remains a hypothesis until it is tried alongside real analysts on real claims. Production would need the model hosted inside the enterprise's own boundary under a data agreement, sending it only the specific fields it needs — at which point the redaction layer becomes a second line of defence rather than the primary control.

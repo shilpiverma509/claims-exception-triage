@@ -85,7 +85,7 @@ class RootCause(str, Enum):
 
 **What "pydantic" is doing here:** `BaseModel` comes from a library called pydantic. When you write `Claim(**raw_dict)`, pydantic checks every field: is `billed_amount_cents` really a whole number ≥ 0? Is `received_date` a real date? If anything's wrong, it raises a `ValidationError` right there — the bad data never gets further into the pipeline pretending to be good data.
 
-**Why this matters for the demo:** there's a deliberately broken record in `data/stress_malformed.json` (negative dollar amount, missing fields). When the pipeline hits it, this is the exact check that catches it — the batch reports one error and keeps going instead of crashing. That's `test_pipeline.py::test_malformed_record_survives_batch`.
+**Why this matters:** there's a deliberately broken record in `data/stress_malformed.json` (negative dollar amount, missing fields). When the pipeline hits it, this is the exact check that catches it — the batch reports one error and keeps going instead of crashing. That's `test_pipeline.py::test_malformed_record_survives_batch`.
 
 > **Our claim, after this step:** Valid. It becomes a real `Claim` object — every field the right type, nothing missing.
 
@@ -325,8 +325,8 @@ def record_decision(claim_id, decision, note=""):
 | Mode | What happens | Needs a key? | Costs money? | Good for |
 |---|---|---|---|---|
 | `mock` | Keyword-matching fake, shown above | No | No | Development, tests, CI |
-| `live` | Real call to Claude via the Anthropic API | Yes | Yes (small) | Real eval numbers, the actual demo |
-| `cached` | Replays a *previous* live response from `outputs/llm_cache.jsonl` | No | No (already paid once) | Reliable, offline, repeatable demo |
+| `live` | Real call to Claude via the Anthropic API | Yes | Yes (small) | Real eval numbers, live walkthroughs |
+| `cached` | Replays a *previous* live response from `outputs/llm_cache.jsonl` | No | No (already paid once) | Reliable, offline, repeatable replay |
 
 **Where this is decided in code:** `config.py`: `TRIAGE_MODE = os.getenv("TRIAGE_MODE", "mock")` — "read the `TRIAGE_MODE` environment variable; if it isn't set, use `\"mock\"`." Set it in `.env` or pass `--mode live` on the command line to override it.
 
@@ -334,11 +334,10 @@ We already ran a live test batch of 8 claims — including this exact example. R
 
 ---
 
-## Getting ready for the demo
+## Running with real Claude calls
 
-This was already the plan on paper — `PRD-spec.md` flags "demo fragility" as a risk and its own mitigation is: *cache the LLM responses ahead of time; live call optional during the actual demo.* Concretely:
+`PRD-spec.md` flags live-call reliability as a risk, mitigated by caching responses for offline replay:
 
 1. **Get an `ANTHROPIC_API_KEY`** and put it in a local `.env` file (never committed).
 2. **Run one real batch in `live` mode** on the dev set — every response gets appended to `outputs/llm_cache.jsonl` as it comes back.
 3. **Switch to `cached` mode** and re-run — same real answers, replayed instantly, no network needed.
-4. **On demo day:** drive the app in `cached` mode for reliability, and optionally trigger one single claim in `live` mode on stage as the "yes, this is really calling Claude" moment.

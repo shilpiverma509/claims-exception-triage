@@ -1,20 +1,16 @@
 # Claims Exception Triage Assistant — Capstone Spec
 
-**Candidate:** Shilpi Verma · **Program:** UHC Tech AI Transformation, Cohort 5 FDE Qualification
 **Track:** #1 — Claims Exception Triage Assistant
-**Due:** Aug 28, 2026 EOD → submitted by email per the programme instructions
-**Stack:** Python (Jupyter notebook for logic + evals) · Streamlit demo app · Anthropic API
+**Stack:** Python (Jupyter notebook for logic + evals) · Streamlit review app · Anthropic API
 
 ---
 
-## 1. One-line pitch
-
-A triage assistant that takes a queue of stuck claims (exceptions), explains *why* each one is stuck, ranks which to work first, proposes the next action, and routes it to the right owner — with a human always approving before anything happens.
+A triage assistant that takes a queue of stuck claims (exceptions), explains _why_ each one is stuck, ranks which to work first, proposes the next action, and routes it to the right owner — with a human always approving before anything happens.
 
 ## 2. Problem framing (→ Submission component 1: Problem Brief)
 
 - **Target user:** Claims operations analyst working an exception queue (claims that failed auto-adjudication).
-- **Pain point:** Analysts spend most of their time *diagnosing* why a claim pended (reading codes, history, notes) before they can act. Queues are worked FIFO or by age, not by impact — high-dollar or SLA-breaching claims wait behind trivial ones.
+- **Pain point:** Analysts spend most of their time _diagnosing_ why a claim pended (reading codes, history, notes) before they can act. Queues are worked FIFO or by age, not by impact — high-dollar or SLA-breaching claims wait behind trivial ones.
 - **Value hypothesis:** If the assistant pre-diagnoses root cause and ranks urgency, analysts start each case with a head start and work the right cases first → lower handle time, fewer SLA breaches.
 - **Success metrics (measured in the prototype):**
   - Root-cause classification accuracy vs labeled synthetic ground truth (target ≥ 85% on the eval set).
@@ -25,7 +21,8 @@ A triage assistant that takes a queue of stuck claims (exceptions), explains *wh
 
 ## 3. Scope
 
-**In scope (v1, demoable):**
+**In scope (v1):**
+
 1. Ingest a synthetic exception queue (CSV/JSON, ~60–80 claims).
 2. Per claim: LLM produces structured output — likely root cause (from a fixed taxonomy), plain-English summary, urgency score with reasons, proposed next action (from a fixed action list), recommended owner queue.
 3. Deterministic guard layer validates/overrides the LLM (schema validation, allowed-value checks, dollar/SLA-based urgency floor).
@@ -54,9 +51,10 @@ urgency floor rules, confidence threshold → "needs human review" fallback)
 ```
 
 Key design decisions to defend:
+
 - **Structured output with a fixed taxonomy**, not free-form generation — makes evaluation possible and failure modes bounded.
-- **LLM proposes, rules dispose:** deterministic guard layer can only make the system *more* conservative (raise urgency, demote confidence, force human review) — never less.
-- **Low-confidence path:** below threshold → routed to "human review" bucket instead of guessing. This is a feature, shown in the demo.
+- **LLM proposes, rules dispose:** deterministic guard layer can only make the system _more_ conservative (raise urgency, demote confidence, force human review) — never less.
+- **Low-confidence path:** below threshold → routed to "human review" bucket instead of guessing. This is a feature.
 - Retries with idempotency (claim_id as key); one claim's failure never kills the batch.
 
 ## 6. Evaluation plan (→ component 3: AI Evidence)
@@ -77,13 +75,13 @@ Key design decisions to defend:
 
 ## 8. Deliverables mapped to the submission package
 
-| # | Component | Artifact |
-|---|-----------|----------|
-| 1 | Problem brief | 1-page PDF (from §2–3) |
-| 2 | Working artifact | Repo: data generator, notebook (pipeline + evals), Streamlit app, README with setup + sample run |
-| 3 | AI evidence | `AI_EVIDENCE.md`: prompts, model/tool choices, eval tables, failure modes, human checkpoints — plus notes on how AI assisted the build itself |
-| 4 | Enterprise readiness | `ENTERPRISE_READINESS.md` (from §7) |
-| 5 | Demo narrative | 5-min recording: problem → live triage of the queue → one failure case caught by guard → eval results → next iteration path |
+| #   | Component            | Artifact                                                                                                                                      |
+| --- | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | Problem brief        | 1-page PDF (from §2–3)                                                                                                                        |
+| 2   | Working artifact     | Repo: data generator, notebook (pipeline + evals), Streamlit app, README with setup + sample run                                              |
+| 3   | AI evidence          | `AI_EVIDENCE.md`: prompts, model/tool choices, eval tables, failure modes, human checkpoints — plus notes on how AI assisted the build itself |
+| 4   | Enterprise readiness | `ENTERPRISE_READINESS.md` (from §7)                                                                                                           |
+| 5   | Demo narrative       | 5-min recording: problem → live triage of the queue → one failure case caught by guard → eval results → next iteration path                   |
 
 ## 9. Day-by-day plan (Aug 21 → 28)
 
@@ -93,19 +91,21 @@ Key design decisions to defend:
 - **Day 4 (Mon 24):** Prompt iterations v2/v3 against dev set; log scores; freeze prompt; run held-out eval once.
 - **Day 5 (Tue 25):** Streamlit app: ranked queue, detail cards, approve/reject, audit view.
 - **Day 6 (Wed 26):** Failure-mode catalog, AI evidence doc, enterprise readiness doc, problem brief.
-- **Day 7 (Thu 27):** Record 5-min demo, polish README, dry-run setup from clean clone. **Buffer.**
+- **Day 7 (Thu 27):** Final recording, polish README, dry-run setup from clean clone. **Buffer.**
 - **Aug 28:** Final read-through, package, email both addresses before EOD.
 
 ## 10. PRD addendum (v1.1)
 
 ### Goals
+
 1. Cut analyst diagnosis time: assistant pre-writes root cause + summary so the analyst starts at "verify" not "investigate" (proxy metric: ≥85% root-cause accuracy on sealed eval set).
 2. Work the queue by impact, not arrival: ≥80% of ground-truth critical claims (severity 4–5) surfaced in the model's top 10.
 3. Route right the first time: ≥90% routing accuracy vs labels.
 4. Zero unsafe automation: 100% of proposed actions pass through human approval; 0 PHI-like strings reach the LLM (redaction test must pass).
-5. Prove judgment to reviewers: every claim in the demo traceable to a logged decision, metric, or documented failure mode.
+5. Prove judgment to reviewers: every claim traceable to a logged decision, metric, or documented failure mode.
 
 ### Non-Goals (v1)
+
 - **No adjudication or denial decisions** — the assistant never decides payment; that's a regulated, high-stakes act far beyond a prototype's evidence bar.
 - **No live system integration** (claims platforms, provider portals) — synthetic queue in, recommendations out; integration is the handoff owner's roadmap.
 - **No auto-execution of actions** — even "safe" ones; the human-approval gate is the product's trust foundation, not a limitation.
@@ -113,6 +113,7 @@ Key design decisions to defend:
 - **No multi-agent orchestration** — see Architecture Decision below.
 
 ### User stories (priority order)
+
 1. As a **claims ops analyst**, I want each stuck claim pre-diagnosed with a plain-English root cause and evidence, so I verify instead of investigate.
 2. As a **claims ops analyst**, I want the queue ranked by urgency (dollars + SLA + severity), so the claim that matters most is on top when I log in.
 3. As a **claims ops analyst**, I want a proposed next action I can approve, reject, or reassign in one click, so acting is fast but always mine.
@@ -121,26 +122,29 @@ Key design decisions to defend:
 6. As the **handoff owner**, I want evals, failure modes, and controls documented, so I can decide what productionizing requires without re-doing discovery.
 
 ### Requirements
+
 **P0 (cannot ship without):** ingest+validate queue incl. malformed-record survival; PHI-pattern redaction before every LLM call; taxonomy-constrained structured output; guard layer (schema check, urgency floor, confidence threshold → human-review bucket); ranked queue UI with approve/reject/reassign; append-only audit log; eval harness with sealed-set metrics; all five submission docs.
+
 - Acceptance (samples): Given the malformed stress record, when the batch runs, then 74/75 claims process and the bad record lands in an error report — no crash. Given the fake-SSN note, when the claim is triaged, then the string sent to the API contains no SSN/DOB/name pattern. Given confidence < threshold, when guard runs, then queue = human_review and the UI shows "needs review", never a guessed team.
 
-**P1 (nice-to-have):** rule-based baseline comparison in eval report (lookup-table strawman — quantifies the LLM's lift and answers the reviewer's question with a number); per-claim "evidence" list in UI; cached demo mode toggle.
+**P1 (nice-to-have):** rule-based baseline comparison in eval report (lookup-table strawman — quantifies the LLM's lift and answers the reviewer's question with a number); per-claim "evidence" list in UI; cached-replay mode toggle.
 
 **P2 (design for, don't build):** feedback loop (analyst corrections becoming eval cases); batch re-triage on data updates; multi-queue load balancing.
 
 ### Open questions
+
 - **Shilpi (blocking, Day 4):** freeze-day integrity call — what do we report if sealed-set score < dev-set score? (Drill ledger item #2.)
-- **Shilpi (non-blocking):** demo recording tool of choice; GitHub repo name.
 - **Resolved:** single-pipeline over multi-agent (below); Python+Streamlit; Anthropic API with mock mode.
 
 ### Architecture Decision: single pipeline, not multi-agent
+
 **Decision:** one LLM call per claim inside a deterministic Python pipeline; no agent framework, no LLM-to-LLM delegation, no dynamic tool choice.
-**Why:** triage of one claim is a single bounded reasoning task over a small context — nothing to parallelize across "specialists," no step where the model must choose tools at runtime. Multi-agent would add latency and cost per claim, a much larger failure surface (inter-agent misunderstandings, cascading hallucinations), and make evaluation nearly impossible to attribute (which agent caused the wrong route?). The orchestration this workflow genuinely needs — ordering, retries, validation, thresholds — is deterministic, so it lives in ordinary code where it is testable and auditable. Agentic *character* is preserved where it earns trust: the LLM proposes, rules dispose, a human approves.
+**Why:** triage of one claim is a single bounded reasoning task over a small context — nothing to parallelize across "specialists," no step where the model must choose tools at runtime. Multi-agent would add latency and cost per claim, a much larger failure surface (inter-agent misunderstandings, cascading hallucinations), and make evaluation nearly impossible to attribute (which agent caused the wrong route?). The orchestration this workflow genuinely needs — ordering, retries, validation, thresholds — is deterministic, so it lives in ordinary code where it is testable and auditable. Agentic _character_ is preserved where it earns trust: the LLM proposes, rules dispose, a human approves.
 **Reviewer framing:** "We considered a multi-agent design and rejected it: enterprise reviewers don't score architecture ambition, they score whether every component can be tested, audited, and explained. A claim like this would justify agents only if it required multi-step tool use — the Prior Auth track's shape, not ours."
 
 ## 11. Risks
 
-- **Scope creep** → the out-of-scope list in §3 is a contract; anything new goes to "next iteration path" in the demo.
+- **Scope creep** → the out-of-scope list in §3 is a contract; anything new goes to a documented "next iteration" note instead.
 - **Eval set contamination** → held-out set touched exactly once, after prompt freeze.
-- **Demo fragility** → cache LLM responses for the demo run; live call optional.
+- **Live-call reliability** → cache LLM responses for offline replay (`cached` mode); a live call is optional, not required, when presenting.
 - **Time** → Streamlit app is the cut line: if Day 5 slips, the notebook + a static ranked-queue HTML export is an acceptable fallback (packet allows "runnable notebook").
