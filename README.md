@@ -9,6 +9,10 @@ technical execution plan and task breakdown.
 
 ## Submission documents
 
+- **Runnable prototype:** this repo itself — no separate notebook. The triage
+  logic runs as a CLI pipeline, `src/triage/pipeline.py` (`make triage`), and
+  the review UI runs as a Streamlit app, `app/review_app.py` (`make demo`).
+  See Quickstart below for exact commands and a sample run.
 - **Problem brief:** `docs/PROBLEM_BRIEF.md` (source) / `docs/PROBLEM_BRIEF.pdf` (submitted 1-page PDF)
 - **AI evidence:** `docs/AI_EVIDENCE.md`
 - **Enterprise readiness:** `docs/ENTERPRISE_READINESS.md`
