@@ -95,6 +95,14 @@ Each entry: what happened, how it was detected, what we did. All dated in `DECIS
 
 8. **Automation bias (open, structural).** Analysts may rubber-stamp high-confidence recommendations, which would convert the human approval gate into a formality. *Mitigations:* confidence and cited evidence are shown on every card so verification is fast; the audit log makes rubber-stamping *measurable* through time-to-approve distributions; a spot-audit workflow on approved claims is the designed next step.
 
+9. **The fix for failure #1 created its mirror image — surfaced by the sealed set (open).** Failure #1 was "shared `provider|cpt` keys let other claims *fill* a rate gap that should be empty." Our fix strips every pricing claim's key after generation — but because the key is shared, it also strips rates from non-pricing claims that legitimately had one. **15 of 75 claims (20%) are shown a missing contract rate they should not be.**
+
+   This produced the one sealed-set miss, `CLM-2026-8050`. The note read *"Member shows termed coverage on DOS"* — unambiguously eligibility. The rate was absent through our bug, and prompt V3 states *"a missing contract_rate entry is positive evidence FOR pricing_mismatch."* The model followed our instruction over a clear note, at 0.85 confidence, and was scored wrong.
+
+   *Detected by:* declining to accept the first explanation offered ("the prompt instruction is too absolute") and asking the further question — why was the rate missing at all? *Deliberately not fixed:* correcting either the fixture or the prompt would require re-running the sealed set, and a held-out set scored twice is not held out. Both are queued for the next version.
+
+   *Three lessons, and the middle one is the general case:* (a) when you fix a data bug, test the **inverse** — we verified pricing gaps survived, never that non-pricing rates did; (b) **evidence keyed more coarsely than the thing it describes will leak in both directions**, which is a data-modelling fault, not a prompt fault; (c) no confidence threshold catches this class, because the model was confidently wrong while correctly following bad inputs — which is the whole argument for the deterministic guard and the human gate.
+
 ## 6. The feedback loop — how analyst corrections improve the system
 
 Implemented in `src/triage/feedback.py`; run with `make feedback`.

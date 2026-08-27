@@ -92,7 +92,11 @@ The baseline is the honest "why an LLM at all?" comparison: guess the cause from
 
 *The development set is saturated.* Prompt versions V1, V2 and V3 all score identically on it, so it can no longer distinguish prompt quality. The same 50 claims hold the baseline to 72%, so the set is not trivially easy — it simply no longer discriminates at this model tier. That is why the sealed number above is the one to trust.
 
-*The single sealed-set miss was caused by our own prompt.* On one claim the note said coverage was terminated, but no contract rate existed in the table. Our prompt instructs the model that a missing rate is positive evidence for a pricing problem — so it followed that rule and chose pricing over eligibility. The instruction is too absolute; a missing rate can coexist with an eligibility problem. That is a prompt-design fix, and exactly the kind of pattern the feedback loop is built to surface.
+*The single sealed-set miss was our fault twice over.* The note read "member shows termed coverage" — unambiguously an eligibility problem — but no contract rate appeared in the table, and our prompt tells the model a missing rate is positive evidence for a pricing problem. It followed our rule over a clear note, at 85% confidence.
+
+Tracing it found the deeper fault. The rate table is keyed by provider-and-procedure, which several claims **share**. Our fix for an earlier bug strips that key for every pricing claim — and because the key is shared, it also stripped rates for other claims that legitimately had one. **15 of 75 claims (20%) are shown a missing rate they should not be.** So the model was fed corrupted evidence *and* told to trust it absolutely. This is the earlier bug recurring in mirror image: we fixed "shared keys wrongly fill a gap" and created "shared keys wrongly empty one," because we never checked the reverse direction.
+
+We did not fix either fault before reporting, because doing so would mean re-running the sealed set and a held-out set scored twice is not held out. Both are logged for the next version. The honest lesson: no confidence threshold would have caught this — the model was not uncertain, it was misled — which is precisely why the rules layer and the human gate exist.
 
 ## Learning from analysts
 
