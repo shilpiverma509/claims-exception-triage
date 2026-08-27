@@ -4,7 +4,9 @@ __pycache__/
 *.pyc
 .pytest_cache/
 outputs/
-.claude/
+# Harness scratch, but the claims-triage skill is a project deliverable.
+.claude/*
+!.claude/skills/
 
 # Generated from real analyst decisions at runtime; never fixture data.
 data/feedback_cases.json
