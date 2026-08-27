@@ -11,9 +11,6 @@ outputs/
 # Generated from real analyst decisions at runtime; never fixture data.
 data/feedback_cases.json
 
-# Internal programme material and third-party PII — kept locally, never committed.
-*instruction-packet*.pdf
+# Speaking-notes script for the demo video — kept locally only.
+docs/demo-script.html
 
-# Rehearsal/demo recordings — large binaries, shared via Drive not git.
-*.mp4
-*.mov

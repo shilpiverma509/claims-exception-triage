@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claims Exception Triage Assistant — Demo</title>
+<style>
+:root{
+  --ground:#10161c; --surface:#18212a; --surface-2:#1f2b35;
+  --ink:#e9eff3; --ink-dim:#93a6b3; --line:#2a3743;
+  --accent:#4db6a4; --accent-dim:#2f7d70; --accent-soft:#153029;
+  --critical:#e0685c; --warn:#d4a24a; --ok:#5fbf8f;
+  --sans:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background:var(--ground);color:var(--ink);font-family:var(--sans);
+  overflow:hidden;-webkit-font-smoothing:antialiased;
+}
+.slide{
+  position:fixed;inset:0;display:none;
+  padding:5vh 6vw 9vh;
+  flex-direction:column;justify-content:center;
+  opacity:0;transition:opacity .18s ease;
+}
+.slide.on{display:flex;opacity:1}
+@media (prefers-reduced-motion:reduce){.slide{transition:none}}
+.wrap{width:100%;max-width:1180px;margin:0 auto}
+
+.eyebrow{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:1.6rem;
+}
+h1{font-size:clamp(2.4rem,5.2vw,4.1rem);font-weight:800;letter-spacing:-.03em;line-height:1.02;text-wrap:balance}
+h2{font-size:clamp(1.6rem,3.2vw,2.5rem);font-weight:750;letter-spacing:-.022em;line-height:1.1;text-wrap:balance;margin-bottom:1.4rem}
+p{font-size:clamp(1rem,1.55vw,1.28rem);line-height:1.5;color:var(--ink-dim);max-width:62ch}
+p+p{margin-top:.85rem}
+strong{color:var(--ink);font-weight:650}
+.lede{font-size:clamp(1.1rem,1.9vw,1.5rem);color:var(--ink);max-width:56ch}
+.mono{font-family:var(--mono)}
+.tag{
+  display:inline-block;font-family:var(--mono);font-size:.78rem;
+  padding:.22em .6em;border-radius:3px;background:var(--surface-2);
+  border:1px solid var(--line);color:var(--ink);
+}
+.big{font-size:clamp(2.6rem,7vw,5rem);font-weight:800;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+.accent{color:var(--accent)}
+.crit{color:var(--critical)} .ok{color:var(--ok)} .warn{color:var(--warn)}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:2.4rem;align-items:start}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+@media (max-width:860px){.grid2,.grid3{grid-template-columns:1fr;gap:1.2rem}}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:1.2rem 1.35rem}
+.card h3{font-size:.78rem;font-family:var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.7rem;font-weight:600}
+.card p{font-size:1rem}
+
+.claim{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:6px;padding:1.1rem 1.3rem;font-family:var(--mono);font-size:clamp(.76rem,1.05vw,.92rem);line-height:1.7}
+.claim .k{color:var(--ink-dim);display:inline-block;min-width:9.5em}
+.claim .v{color:var(--ink)}
+
+table{width:100%;border-collapse:collapse;font-size:clamp(.84rem,1.25vw,1.04rem)}
+th,td{text-align:left;padding:.55em .8em;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+th{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dim);font-weight:600}
+td.num{font-family:var(--mono)}
+tr.hi td{background:var(--accent-soft)}
+
+.flow{display:flex;flex-wrap:wrap;gap:.5rem;align-items:stretch;margin-top:.4rem}
+.step{
+  flex:1 1 150px;background:var(--surface);border:1px solid var(--line);
+  border-radius:6px;padding:.7rem .8rem;min-width:0;
+}
+.step .n{font-family:var(--mono);font-size:.68rem;color:var(--accent);letter-spacing:.1em}
+.step .t{font-weight:650;font-size:.95rem;margin:.15rem 0 .2rem}
+.step .d{font-size:.79rem;color:var(--ink-dim);line-height:1.35}
+.step .file{font-family:var(--mono);font-size:.68rem;color:var(--ink-dim);opacity:.55;margin-top:.35rem;display:block}
+.step.guard{border-color:var(--warn)} .step.guard .n{color:var(--warn)}
+.step.human{border-color:var(--ok)} .step.human .n{color:var(--ok)}
+.step.llm{border-color:var(--accent)}
+
+ul{list-style:none;display:flex;flex-direction:column;gap:.65rem;max-width:64ch}
+li{padding-left:1.3rem;position:relative;font-size:clamp(.95rem,1.4vw,1.14rem);line-height:1.42;color:var(--ink-dim)}
+li::before{content:"";position:absolute;left:0;top:.6em;width:6px;height:6px;border-radius:1px;background:var(--accent)}
+li strong{color:var(--ink)}
+
+.quote{
+  border-left:3px solid var(--accent);padding:.5rem 0 .5rem 1.2rem;
+  font-size:clamp(.98rem,1.5vw,1.22rem);line-height:1.5;color:var(--ink);max-width:60ch;
+}
+.quote .src{display:block;margin-top:.6rem;font-family:var(--mono);font-size:.76rem;color:var(--ink-dim);letter-spacing:.04em}
+
+.badge{display:inline-flex;align-items:center;gap:.4em;font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;padding:.3em .7em;border-radius:99px;border:1px solid var(--line);color:var(--ink-dim)}
+.badge.live{border-color:var(--accent-dim);color:var(--accent)}
+.badge.mock{border-color:var(--warn);color:var(--warn)}
+.badge::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+
+.guardflow{display:flex;align-items:center;gap:1.6rem;flex-wrap:wrap;margin:.9rem 0 1.2rem}
+.guardflow .num{text-align:center}
+.guardflow .arrow{font-size:2rem;color:var(--accent)}
+
+.callout{background:var(--accent-soft);border:1px solid var(--accent-dim);border-radius:8px;padding:1rem 1.3rem;margin-top:1.2rem}
+.callout p{color:var(--ink)}
+
+.disclaim{border:1px solid var(--warn);border-radius:8px;padding:1.1rem 1.4rem;background:rgba(212,162,74,.06)}
+
+.uimock{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#0d1319}
+.uimock .uibar{display:flex;gap:.4rem;align-items:center;padding:.6rem .9rem;background:var(--surface-2);border-bottom:1px solid var(--line)}
+.uimock .uibar .dot{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.uimock .uititle{font-family:var(--mono);font-size:.72rem;color:var(--ink-dim);margin-left:.4rem}
+.uimock .uitabs{display:flex;gap:1.4rem;padding:.5rem .9rem 0;font-family:var(--mono);font-size:.72rem;color:var(--ink-dim)}
+.uimock .uitabs .on{color:var(--accent);border-bottom:2px solid var(--accent);padding-bottom:.4rem}
+.uimock .uirow{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.85rem .9rem;border-top:1px solid var(--line)}
+.uimock .uiband{font-family:var(--mono);font-size:.7rem;font-weight:700;padding:.15em .55em;border-radius:3px;color:#0d1319}
+.uimock .uimeta{font-size:.86rem;color:var(--ink-dim);flex:1}
+.uimock .uimeta strong{color:var(--ink)}
+.uimock .uiactions{display:flex;gap:.4rem;flex-shrink:0}
+.uimock .uibtn{font-family:var(--mono);font-size:.72rem;padding:.35em .7em;border-radius:5px;border:1px solid var(--line);color:var(--ink-dim);background:var(--surface)}
+.uimock .uibtn.appr{border-color:var(--ok);color:var(--ok)}
+.uimock .uibtn.rej{border-color:var(--critical);color:var(--critical)}
+
+.rail{position:fixed;left:0;right:0;bottom:0;height:3px;background:var(--line)}
+.rail .fill{height:100%;background:var(--accent);width:0;transition:width .2s ease}
+.chrome{position:fixed;bottom:1.1rem;right:1.6rem;font-family:var(--mono);font-size:.74rem;color:var(--ink-dim);letter-spacing:.08em}
+.hint{position:fixed;bottom:1.1rem;left:1.6rem;font-family:var(--mono);font-size:.7rem;color:var(--line);letter-spacing:.06em}
+
+.navbtn{
+  position:fixed;top:50%;transform:translateY(-50%);z-index:20;
+  width:2.6rem;height:2.6rem;border-radius:50%;
+  background:var(--surface);border:1px solid var(--line);color:var(--ink);
+  font-size:1.1rem;line-height:1;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:border-color .15s ease,color .15s ease;
+}
+.navbtn:hover{border-color:var(--accent);color:var(--accent)}
+.navbtn:disabled{opacity:.3;cursor:default}
+.navbtn:disabled:hover{border-color:var(--line);color:var(--ink)}
+#prevBtn{left:1.4rem}
+#nextBtn{right:1.4rem}
+
+.note{
+  display:none;position:fixed;left:0;right:0;bottom:2.6rem;
+  background:var(--surface-2);border-top:1px solid var(--accent);
+  padding:.9rem 1.6rem;font-size:.92rem;color:var(--ink);line-height:1.45;
+}
+body.notes .note.on{display:block}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+</style>
+</head>
+<body>
+
+<!-- 1 : Introduction -->
+<section class="slide on"><div class="wrap">
+  <div class="eyebrow">UHC Tech AI Transformation · Cohort 5 · Track 1</div>
+  <h1>Claims Exception<br>Triage Assistant</h1>
+  <p class="lede" style="margin-top:1.6rem">Diagnoses why a pended claim sitting in the claims-ops exception queue is stuck, re-ranks that exception queue by urgency, and routes each claim to the correct owner team — with a human approving every action before anything executes.</p>
+  <p style="margin-top:2rem" class="mono">Shilpi Verma · Software Developer, MyUHC CNS</p>
+</div>
+<div class="note">10 seconds. Say the one-liner exactly as written — it's dense on purpose, it should stand alone even for someone who only reads this slide.</div>
+</section>
+
+<!-- 2 : Disclaimers -->
+<section class="slide"><div class="wrap">
+  <div class="eyebrow">Before anything else</div>
+  <h2>Four things worth knowing before we start.</h2>
+  <div class="disclaim">
+    <ul>
+      <li><strong>Everything is synthetic.</strong> Claims, source-system data (prior-auth registry, claim history, contract rates), and ground-truth labels were all generated for this capstone — no real member or claim data anywhere.</li>
+      <li><strong>The source systems are mock fixtures.</strong> JSON files standing in for enterprise APIs. Built so swapping in real adapters is a swap, not a redesign — but that swap hasn't happened. Nothing here talks to a live claims platform.</li>
+      <li><strong>The time-savings case is a hypothesis</strong>, not a measured result. It hasn't been tested against a real analyst's workflow.</li>
+      <li>I authored the synthetic data's difficulty myself, so every number in this deck answers <strong>"does the mechanism work,"</strong> not "how accurate will this be in production."</li>
+    </ul>
+  </div>
+</div>
+<div class="note">15 seconds. Don't skip this — it's the frame the reviewer should hold for every slide that follows.</div>
+</section>
+
+<!-- 2b : Deliverable checklist -->
+<section class="slide"><div class="wrap">
+  <div class="eyebrow">What this submission is</div>
+  <h2>Every required piece, mapped to exactly what I built.</h2>
+  <table>
+    <thead><tr><th>Required</th><th>What's here</th><th>Where</th></tr></thead>
+    <tr><td>A runnable app with sample data</td><td><span class="mono tag">make triage</span> processes every claim end to end and writes a ranked result file. <span class="mono tag">make demo</span> opens that result in a web app where a person reviews it.</td><td class="mono">Makefile</td></tr>
+    <tr><td>Sample data</td><td>75 seeded synthetic claims + 3 mock source systems (prior auth, history, contract rates)</td><td class="mono">data/*.json, data/mock_systems/</td></tr>
+    <tr><td>Triage logic</td><td>8-stage pipeline: validate → redact → evidence → diagnose → guard → rank → human → audit</td><td class="mono">src/triage/pipeline.py</td></tr>
+    <tr><td>Prompt notes</td><td>3 versioned prompts, iterated and frozen — v1 kept alongside v2, v3 as documented history</td><td class="mono">src/triage/prompts.py</td></tr>
+    <tr><td>Eval notes</td><td>Metrics harness, confusion matrix, written eval reports, sealed-set discipline</td><td class="mono">src/triage/evaluate.py, docs/AI_EVIDENCE.md</td></tr>
+    <tr><td>Exception-handling tests</td><td>Pytest suite: malformed-record handling, redaction, guard invariant, feedback invariant</td><td class="mono">tests/*.py</td></tr>
+  </table>
+  <p style="margin-top:1.2rem" class="lede">Everything after this slide is one of these six rows, shown running.</p>
+</div>
+<div class="note">15 seconds. This slide exists so a reviewer scoring against a checklist can see, at a glance, that every required piece is here before I show any of them in detail.</div>
+</section>
+
+<!-- 2c : How this got built -->
+<section class="slide"><div class="wrap">
+  <div class="eyebrow">Before the code</div>
+  <h2>Planned before a single line was written.</h2>
+  <ul>
+    <li><strong>Started with a problem brief.</strong> Target user, the actual pain point, and the fixed 7-cause list were all written down first, in <span class="mono">PRD-spec.md</span> — before any code.</li>
+    <li><strong>Broken into a low-level plan.</strong> <span class="mono">LOW_LEVEL_PLAN.md</span> splits the build into 20 concrete tasks — one task per file, each with its own inputs, outputs, and a clear way to check it was done.</li>
+    <li><strong>Every real decision logged as it happened.</strong> <span class="mono">DECISION_LOG.md</span> records each non-obvious call, the alternative considered, and the reason — dated, including ones I got wrong the first time and fixed.</li>
+    <li><strong>A written procedure, not just code.</strong> A separate document walks through triaging a claim by hand, step for step — the exact same procedure the code runs, so a person can reason about a claim the same way the system does.</li>
+  </ul>
+  <div class="callout" style="margin-top:1.2rem">
+    <p><strong>One real example, from that log, dated 2026-08-23:</strong> fixing the urgency-floor rule quietly reintroduced a smaller version of the same ordering problem you're about to see on the next slide — a lot of claims landed on the exact same urgency score, so without a tie-break rule, a bigger claim could still rank below a smaller one, just by chance instead of by age. A real bug, caught before it shipped — it's exactly why the ranking step you'll see shortly breaks ties by dollar amount.</p>
+  </div>
+</div>
+<div class="note">30 seconds. The point of this slide: nothing here was improvised — the plan, the task breakdown, and the decisions all exist as dated files, written before and during the build. Use the concrete example to make it real instead of abstract.</div>
+</section>
+
+<!-- 3 : The problem -->
+<section class="slide"><div class="wrap">
+  <div class="eyebrow">1 · the problem</div>
+  <h2>The hard part isn't fixing the claim.<br>It's working out why it's stuck.</h2>
+  <div class="grid2" style="margin-top:.5rem">
+    <div>
+      <ul>
+        <li>Most claims process automatically. When one can't, it drops into the <strong>exception queue</strong> — a holding list for claims that need a person.</li>
+        <li>Every claim there carries a <span class="tag">pend code</span> — a short system code meant to say why it stopped, like an error code. In practice it's often generic: <em>"needs review,"</em> not <em>what</em> to review.</li>
+        <li>So an analyst opens it, reads the <strong>note</strong> — a free-text comment a person typed the last time someone looked at this claim — then manually logs into a few separate lookup systems to confirm what's actually wrong: was there a prior authorization on file, has this claim come through before, is there a contracted rate for this procedure. Nothing pulls those answers together automatically.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>And the order is wrong</h3>
+      <p>The exception queue is worked <strong>oldest-first</strong>, not worst-first.</p>
+      <p style="margin-top:.9rem">An overdue <strong class="mono crit">$42,000</strong> claim can sit behind a <strong class="mono">$45</strong> claim that simply arrived earlier — illustrative, not a measured rate.</p>
+    </div>
+  </div>
+</div>
+<div class="note">25 seconds. No percentages here on purpose — that number would be a synthetic-data artifact, not an observed fact. Define pend code and note out loud here, plainly — this is the vocabulary the rest of the deck assumes. The $42k-behind-$45 line is the one that lands.</div>
+</section>
+
+<!-- 4 : Pipeline part 1 -->
+<section class="slide"><div class="wrap">
+  <div class="eyebrow">2 · the pipeline, part 1 — offline, no model</div>
+  <h2>First, the sample data is generated.</h2>
+  <div class="grid2">
+    <div class="card">
+      <h3 class="mono">generate_data.py</h3>
+      <p>Seeded random generator producing 75 synthetic claims — 50 into <span class="tag">dev_claims.json</span> for practice, 25 sealed into <span class="tag">eval_claims.json</span> — each with a matching ground-truth label. Assigns pend codes P10–P16 one-to-one with the 7 root causes, plus generic codes that carry no signal, plus deliberate "trap" claims where the note implies one cause and the evidence says another.</p>
+    </div>
+    <div class="card">
+      <h3 class="mono">generate_mock_systems.py</h3>
+      <p>Generates the 3 mock source systems — prior-auth registry, claim history, contract rates — including the planted contradictions the trap claims above depend on.</p>
+    </div>
+  </div>
+  <p style="margin-top:1.4rem"><code class="mono tag">make data</code> — runs once, offline, no LLM involved at all.</p>
+  <p style="margin-top:.6rem" class="lede">The difficulty of every claim in this project was <strong>authored, not observed</strong> — this is exactly why the disclaimers on slide 2 matter more than usual here.</p>
+</div>
+<div class="note">25 seconds. This slide exists to make one point: the data's hardness is a design choice I made, not a fact about the world.</div>
+</section>
+
+<!-- 5 : Pipeline part 2 -->
+<section class="slide"><div class="wrap">
+  <div class="eyebrow">3 · the pipeline, part 2 — per claim</div>
+  <h2>Then each claim runs eight steps. Only one is the model.</h2>
+  <div class="flow">
+    <div class="step"><div class="n">01</div><div class="t">Validate</div><div class="d">Check the claim's fields make sense (real dates, non-negative amounts). One bad record gets skipped — it never crashes the batch.</div><span class="file">models.py</span></div>
+    <div class="step"><div class="n">02</div><div class="t">Redact</div><div class="d">Strip anything personally identifying (SSN, birthdate, phone, email) before the text reaches a model or a log.</div><span class="file">redact.py</span></div>
+    <div class="step"><div class="n">03</div><div class="t">Evidence</div><div class="d">Look up this claim's prior authorization, claim history, and contract rate — the "several systems" from slide 3, done automatically here.</div><span class="file">store.py</span></div>
+    <div class="step llm"><div class="n">04</div><div class="t">Diagnose <span class="accent">(AI model)</span></div><div class="d">One AI call. It must answer from a fixed list of 7 possible reasons — it can't invent a new one.</div><span class="file">llm.py</span></div>
+  </div>
+  <div class="flow" style="margin-top:.5rem">
+    <div class="step guard"><div class="n">05</div><div class="t">Guard</div><div class="d">Plain code double-checks the AI's answer. Can only make the result more cautious, never less.</div><span class="file">guard.py</span></div>
+    <div class="step"><div class="n">06</div><div class="t">Rank + store</div><div class="d">Sort the queue worst-first — most urgent, tie-broken by dollar amount.</div><span class="file">store.py</span></div>
+    <div class="step human"><div class="n">07</div><div class="t">Human decision</div><div class="d">An analyst approves, rejects, or reassigns. Nothing happens until they do.</div><span class="file">review_app.py</span></div>
+    <div class="step"><div class="n">08</div><div class="t">Audit</div><div class="d">Every step is written to a permanent log: what happened, when, on what input.</div><span class="file">audit.py</span></div>
+  </div>
+  <p style="margin-top:1.4rem"><code class="mono tag">make triage</code> — runs all eight steps in order, one command, coordinated by pipeline.py.</p>
+  <p class="lede" style="margin-top:.7rem">Only one of these eight steps calls a model. <strong>The rest is plain, testable Python.</strong></p>
+</div>
+<div class="note">30 seconds. Point at 04 and 05 together: "one step is the model, the next step checks it."</div>
+</section>
+
+<!-- 5b : Architecture / call sequence -->
+<section class="slide"><div class="wrap">
+  <div class="eyebrow">4 · sequence diagram</div>
+  <h2>One claim, every call, in order.</h2>
+  <div style="overflow-x:auto;max-width:100%">
+  <pre class="mermaid" style="background:transparent;min-width:640px">
+%%{init: {'theme':'dark', 'themeVariables': {'darkMode': true, 'background':'#18212a', 'primaryColor':'#1f2b35', 'primaryTextColor':'#e9eff3', 'primaryBorderColor':'#4db6a4', 'lineColor':'#4db6a4', 'secondaryColor':'#153029', 'tertiaryColor':'#18212a', 'fontSize':'13px'}}}%%
+sequenceDiagram
+    participant Q as Exception Queue
+    participant P as Pipeline
+    participant S as Source Systems
+    participant AI as AI Model
+    participant G as Guard
+    participant L as Audit Log
+    participant A as Analyst
+
+    Q->>P: pended claim
+    P->>P: validate + redact
+    P->>S: look up PA, history, rate
+    S-->>P: evidence bundle
+    P->>AI: claim + evidence + fixed list of causes
+    AI-->>P: cause, urgency, confidence, citations
+    P->>L: record AI decision
+    P->>G: apply safety checks
+    Note over G: can only raise urgency or force review
+    G-->>P: final urgency, final routing
+    P->>L: record any overrides
+    P->>Q: ranked queue entry
+    A->>Q: reviews ranked claim
+    A->>L: approve / reject / reassign
+    opt correction made
+        L-->>A: queued for a human-reviewed feedback report
+    end
+  </pre>
+  </div>
+  <p style="margin-top:.6rem" class="lede">Full version, with the malformed-record branch and module names, lives in <span class="mono">docs/ARCHITECTURE.md</span>.</p>
+</div>
+<div class="note">25 seconds. Walk it top to bottom once, slowly. Land on two lines: the AI gets claim + evidence together in one call, and the guard runs on every claim, every time.</div>
+</section>
+
+<!-- 6 : Trust design -->
+<section class="slide"><div class="wrap">
+  <div class="eyebrow">5 · the trust design</div>
+  <h2>"The model proposes. Code disposes.<br>A human approves."</h2>
+  <ul style="margin-top:.5rem">
+    <li>The <strong>guard</strong> — a separate block of plain, ordinary code that runs right after the AI answers — can only make the system <strong>more cautious</strong>: raise the urgency score, or force a human to look. It never relaxes anything the AI said.</li>
+    <li>The AI is <strong>blocked at the code level</strong> from sending a claim to a human reviewer itself; only the guard can do that.</li>
+    <li><strong>Nothing executes automatically.</strong> No claim is paid, denied, or adjusted by the system — every action still waits on a person.</li>
+  </ul>
+</div>
+<div class="note">20 seconds. This is the line that matters most in the whole deck — say it slowly, then move on.</div>
+</section>
+
+<!-- 9 : Journey 1 -->
+<section class="slide"><div class="wrap">
+  <div class="eyebrow">6 · claim journey — model right, guard still adjusts it</div>
+  <h2>CLM-2026-8015 <span class="badge live">live model call</span></h2>
+  <div class="claim">
+    <div><span class="k">provider</span><span class="v">Harborview Physical Therapy · CPT 97110 <span style="opacity:.6">(the billing code for this procedure — physical therapy)</span></span></div>
+    <div><span class="k">billed</span><span class="v">$42,000</span></div>
+    <div><span class="k">deadline</span><span class="v">2026-08-17 <span class="crit">— 6 days overdue</span></span></div>
+    <div><span class="k">pend code</span><span class="v">P99 · second touch <span style="opacity:.6">(an analyst has already looked at this claim once before)</span></span></div>
+    <div style="margin-top:.5rem"><span class="k">note</span><span class="v">"Plan ID on claim does not match active segment for the member on date of service."</span></div>
+  </div>
+  <p style="margin-top:.9rem;font-size:.92rem">Two numbers the system produces: <strong>urgency</strong> — a 0–100 score for how badly this claim needs attention now — and <strong>confidence</strong> — how sure the AI is about its own diagnosis.</p>
+  <div class="guardflow">
+    <div class="num"><div class="eyebrow" style="margin-bottom:.3rem">Model's urgency</div><div class="big">82</div></div>
+    <div class="arrow">&rarr;</div>
+    <div class="num"><div class="eyebrow" style="margin-bottom:.3rem">Final urgency</div><div class="big crit">95</div></div>
+    <div style="flex:1;min-width:240px">
+      <p class="mono" style="color:var(--warn)">guard: deadline already passed → floor of 95</p>
+      <p style="margin-top:.4rem">Diagnosed cause: <strong class="ok">eligibility_mismatch</strong> — the member's coverage plan doesn't match what's on the claim. Confidence 0.95 — correct. Routed to the <span class="mono">eligibility team</span> (the group that handles this category of problem), urgency band CRITICAL.</p>
+    </div>
+  </div>
+  <div class="callout"><p>Even a correct, confident answer gets its urgency recomputed by a plain, fixed rule — deadline math shouldn't be trusted to a language model when a plain rule settles it exactly.</p></div>
+</div>
+<div class="note">30 seconds. The model got this one right — the point isn't the mistake, it's that the guard still touches every claim, even correct ones.</div>
+</section>
+
+<!-- 10b : Review UI -->
+<section class="slide"><div class="wrap">
+  <div class="eyebrow">7 · the review UI — where a human closes the loop</div>
+  <h2>A Streamlit app. Every click writes one line to the log.</h2>
+  <div class="uimock">
+    <div class="uibar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="uititle">streamlit run app/review_app.py</span></div>
+    <div class="uitabs"><span class="on">Ranked Queue</span><span>Audit Trail</span></div>
+    <div class="uirow">
+      <span class="uiband" style="background:var(--critical)">CRITICAL 95</span>
+      <span class="uimeta"><strong>CLM-2026-8015</strong> · Harborview Physical Therapy · $42,000 · eligibility_team</span>
+      <div class="uiactions"><span class="uibtn appr">✅ Approve</span><span class="uibtn rej">❌ Reject</span><span class="uibtn">↪ Reassign</span></div>
+    </div>
+    <div class="uirow" style="opacity:.5">
+      <span class="uiband" style="background:var(--line);color:var(--ink-dim)">···</span>
+      <span class="uimeta">rest of the ranked queue</span>
+    </div>
+  </div>
+  <div class="grid2" style="margin-top:1.3rem">
+    <div class="card">
+      <h3>Approve</h3>
+      <p>One click, no extra input by design — friction here suppresses the very corrections the loop needs. Writes <span class="mono">human_decision: approve</span> to the audit log. Counts toward calibration only; it is <strong>never treated as a confirmed-correct label.</strong></p>
+    </div>
+    <div class="card">
+      <h3>Reject / Reassign</h3>
+      <p>The analyst also picks the <strong>actual root cause</strong> from the same fixed 7-item list the AI uses (or "none of these fit"). The correct team is derived from that cause automatically — an analyst can't create a pairing the guard would forbid either. Writes the correction to the audit log.</p>
+    </div>
+  </div>
+  <p style="margin-top:1rem">Either way: <strong>nothing executes.</strong> No claim is paid, denied, or reassigned in any real system — the click only appends one row to <span class="mono">outputs/audit.jsonl</span>. The second tab, Audit Trail, is that same log rendered as a searchable table — every ingest, redaction, AI call, guard override, and human decision, filterable by claim.</p>
+</div>
+<div class="note">30 seconds. Point at the two buttons and say the sentence plainly: "approve writes a row, reject writes a row — the row is the entire effect." That's the whole point of this slide.</div>
+</section>
+
+<!-- 11 : Results -->
+<section class="slide"><div class="wrap">
+  <div class="eyebrow">8 · measured results — where these numbers come from</div>
+  <h2>Sealed set, scored once: <span class="accent">24/25</span> root cause</h2>
+  <p style="margin-bottom:1rem">Every synthetic claim already has a ground-truth answer, written down when it was generated — the correct root cause, team, and severity. Running <span class="mono tag">make triage</span> produces one file per claim: what the system decided. <span class="mono tag">make eval</span> then compares the two files, claim by claim, and counts.</p>
+  <div class="grid2">
+    <div>
+      <p style="margin-bottom:.7rem"><strong>Sealed set</strong> — 25 claims held back, scored exactly once after the prompt was frozen.</p>
+      <table>
+        <tr><td>Diagnosed the right reason</td><td class="num accent"><strong>24/25</strong></td></tr>
+        <tr><td>Routed to the right team</td><td class="num accent"><strong>24/25</strong></td></tr>
+        <tr><td>Worst claims in top 10 of the queue</td><td class="num accent"><strong>100%</strong></td></tr>
+        <tr><td>Ranking matches true worst-first order<sup class="mono" style="font-size:.7em">†</sup></td><td class="num accent"><strong>0.83</strong></td></tr>
+      </table>
+    </div>
+    <div>
+      <p style="margin-bottom:.7rem"><strong>Dev set</strong> — 50 claims, against the rule-based baseline (pend code → table, dollars-only urgency).</p>
+      <table>
+        <thead><tr><th></th><th>Baseline</th><th>System</th></tr></thead>
+        <tr><td>Right reason</td><td class="num">72%</td><td class="num accent"><strong>100%</strong></td></tr>
+        <tr><td>Right team</td><td class="num">76%</td><td class="num accent"><strong>100%</strong></td></tr>
+        <tr><td>Worst in top 10</td><td class="num">50%</td><td class="num accent"><strong>100%</strong></td></tr>
+        <tr><td>Ranking order<sup class="mono" style="font-size:.7em">†</sup></td><td class="num">0.55</td><td class="num accent"><strong>0.82</strong></td></tr>
+      </table>
+    </div>
+  </div>
+  <p style="margin-top:1.1rem;font-size:.85rem;color:var(--ink-dim)"><sup class="mono">†</sup> a statistic (0 to 1) for how well the urgency score's order matches the true worst-first order — 1 means it never misranks a claim.</p>
+  <div class="callout" style="margin-top:1.1rem">
+    <p><strong>The one miss, concretely — <span class="mono">CLM-2026-8050</span>:</strong> label says <span class="mono ok">eligibility_mismatch</span>; the system said <span class="mono crit">pricing_mismatch</span> at confidence 0.85. That's the only mismatch in 25 pairs, so <span class="mono">24/25 = 96%</span>. A chart showing exactly which causes get mixed up with which, plus the full miss list, is written to <span class="mono">outputs/eval_report_*.md</span> on every run — not summarized by hand.</p>
+  </div>
+  <p style="margin-top:.8rem">Every number here describes behavior on the <strong>sealed synthetic set</strong> — not a claim about production accuracy. The <strong>baseline</strong> is a rule-based alternative — no AI, just "guess from the code, rank by dollars" — used to show what the AI adds. That one miss was coherent, evidence-citing, and confidently wrong: no confidence threshold would have caught it, which is exactly why the guard and the human gate exist.</p>
+</div>
+<div class="note">40 seconds. This is the slide most likely to get a follow-up question — "how was that computed?" Say the two commands (make triage, make eval) and the one worked miss before moving on.</div>
+</section>
+
+<!-- 12 : Feedback loop -->
+<section class="slide"><div class="wrap">
+  <div class="eyebrow">9 · feedback loop — when it runs, and what comes out</div>
+  <h2>Not automatic. Not continuous. Run on purpose.</h2>
+  <p style="margin-bottom:1rem">Someone runs <span class="mono tag">make feedback</span> after a batch of Reject/Reassign clicks has piled up in the audit log from slide 10 — nothing fires on a schedule or after a single click. It reads every correction since the last run and turns it into three things:</p>
+  <div class="grid3">
+    <div class="card"><h3>A permanent test case</h3><p>Only if the analyst's cause differs from what the AI said. Saved as a labeled example the test suite checks against — so if a future prompt change breaks this same claim again, <span class="mono">make test</span> catches it.</p></div>
+    <div class="card"><h3>A confidence check</h3><p>How often a correction happens, grouped by how confident the AI was at the time. This suggests a new confidence cutoff for forcing human review, and states its cost in extra escalations — it never applies the change itself.</p></div>
+    <div class="card"><h3>Prompt material</h3><p>Repeated "said X, actually Y" patterns and draft worked examples, written to a report for a person to read and, by hand, fold into the next version of the AI's instructions.</p></div>
+  </div>
+  <p class="lede" style="margin-top:1.4rem"><strong>An approval is not a label.</strong> A rejection costs the analyst effort and carries information; an approval might just mean someone clicked through forty claims. So only corrections teach the system anything — approvals just get counted, never treated as "confirmed correct."</p>
+  <p style="margin-top:.7rem">The output is a markdown report in <span class="mono">outputs/</span>, read by a person. Nothing retrains and no prompt file changes until that person edits <span class="mono">prompts.py</span> themselves — <strong>the loop closes through a reviewed release, never silently.</strong></p>
+</div>
+<div class="note">35 seconds. This directly answers "when does feedback happen" — say the command out loud, then the three outputs, then land on "a person edits the prompt file — nothing retrains itself."</div>
+</section>
+
+<!-- 13 : Close -->
+<section class="slide"><div class="wrap">
+  <div class="eyebrow">10 · close — the next iteration</div>
+  <h2>The next iteration isn't a rebuild — it's feedback, running.</h2>
+  <p style="margin-bottom:1rem">Fix the one prompt line that caused the sealed-set miss, then let the loop from the last slide do the rest. Every real correction can become a <strong>confusion pair</strong> — a repeated pattern where the system keeps saying cause X when the real answer is Y. That pattern is a prompt problem, not a one-off mistake — and it's exactly the kind of edge case synthetic data can't surface, because I already know what my own synthetic data looks like. Enough pairs on the same two causes becomes the material for a new prompt version, drafted by hand from real cases, evaluated on the dev set before it's trusted, frozen only if it actually beats the current one. Real edge cases in, a sharper prompt out — never automatic, never silent.</p>
+  <p class="lede" style="margin-top:1.2rem">The one thing that doesn't change once any of that happens: <strong>a human approves every action.</strong> That's not a limitation — that's the product.</p>
+</div>
+<div class="note">30 seconds. End on the last line and stop talking. Don't trail off into extra detail.</div>
+</section>
+
+<!-- 14 : Thank you -->
+<section class="slide"><div class="wrap">
+  <div class="eyebrow">Claims Exception Triage Assistant</div>
+  <h1>Thank you.</h1>
+  <p style="margin-top:2rem" class="mono">Shilpi Verma · Software Developer, MyUHC CNS</p>
+</div>
+<div class="note">5 seconds. Pause, smile, stop the recording.</div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ startOnLoad: true, theme: "dark",
+      themeVariables: { darkMode: true, background: "#18212a",
+        primaryColor: "#1f2b35", primaryTextColor: "#e9eff3",
+        primaryBorderColor: "#4db6a4", lineColor: "#4db6a4",
+        secondaryColor: "#153029", tertiaryColor: "#18212a" } });
+  }
+</script>
+
+<button class="navbtn" id="prevBtn" aria-label="Previous slide">&larr;</button>
+<button class="navbtn" id="nextBtn" aria-label="Next slide">&rarr;</button>
+<div class="rail"><div class="fill" id="fill"></div></div>
+<div class="chrome"><span id="num">1</span> / <span id="tot">15</span></div>
+<div class="hint">← → / click / scroll · S speaker notes · F fullscreen</div>
+
+<script>
+(function(){
+  var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
+  var i = 0;
+  var num = document.getElementById("num");
+  var fill = document.getElementById("fill");
+  document.getElementById("tot").textContent = slides.length;
+
+  var prevBtn = document.getElementById("prevBtn");
+  var nextBtn = document.getElementById("nextBtn");
+
+  function show(n){
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach(function(s, k){
+      s.classList.toggle("on", k === i);
+      var note = s.querySelector(".note");
+      if (note) note.classList.toggle("on", k === i);
+    });
+    num.textContent = i + 1;
+    fill.style.width = ((i + 1) / slides.length * 100) + "%";
+    prevBtn.disabled = i === 0;
+    nextBtn.disabled = i === slides.length - 1;
+  }
+
+  document.addEventListener("keydown", function(e){
+    var k = e.key;
+    if (k === "ArrowRight" || k === "PageDown" || k === " ") { e.preventDefault(); show(i + 1); }
+    else if (k === "ArrowLeft" || k === "PageUp") { e.preventDefault(); show(i - 1); }
+    else if (k === "Home") { show(0); }
+    else if (k === "End") { show(slides.length - 1); }
+    else if (k === "s" || k === "S") { document.body.classList.toggle("notes"); }
+    else if (k === "f" || k === "F") {
+      if (document.fullscreenElement) document.exitFullscreen();
+      else document.documentElement.requestFullscreen();
+    }
+  });
+
+  document.addEventListener("click", function(e){
+    if (e.target.closest(".navbtn")) return;
+    if (e.clientX < window.innerWidth * 0.25) show(i - 1);
+    else show(i + 1);
+  });
+
+  prevBtn.addEventListener("click", function(){ show(i - 1); });
+  nextBtn.addEventListener("click", function(){ show(i + 1); });
+
+  var wheelLock = false;
+  document.addEventListener("wheel", function(e){
+    if (wheelLock) return;
+    if (Math.abs(e.deltaY) < 12) return;
+    wheelLock = true;
+    if (e.deltaY > 0) show(i + 1); else show(i - 1);
+    setTimeout(function(){ wheelLock = false; }, 450);
+  }, { passive: true });
+
+  show(0);
+})();
+</script>
+</body>
+</html>
