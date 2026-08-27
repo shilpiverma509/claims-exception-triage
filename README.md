@@ -7,6 +7,12 @@ deterministic guard layer and an append-only audit log around every call.
 See `PRD-spec.md` for the full problem brief and `LOW_LEVEL_PLAN.md` for the
 technical execution plan and task breakdown.
 
+## Submission documents
+
+- **Problem brief:** `docs/PROBLEM_BRIEF.md` (source) / `docs/PROBLEM_BRIEF.pdf` (submitted 1-page PDF)
+- **AI evidence:** `docs/AI_EVIDENCE.md`
+- **Enterprise readiness:** `docs/ENTERPRISE_READINESS.md`
+
 ## Setup
 
 ```bash
